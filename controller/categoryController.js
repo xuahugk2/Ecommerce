@@ -11,7 +11,34 @@ const categoryController = {
     },
     createCategory: async (req, res) => {
         try {
-            res.json('Check admin success')
+            //if user have role = 1 ---> admin
+            //only admin can create, delete and update category
+            const {name} = req.body
+            const category = await categoryModel.findOne({name})
+            if(category) return res.status(400).json({msg: "This category already exists."})
+
+            const newCategory = new categoryModel({name})
+
+            await newCategory.save()
+            res.json({msg: "Create a category"})
+        } catch (error) {
+            return res.status(500).json({msg: error.message})
+        }
+    },
+    deleteCategory: async (req, res) => {
+        try {
+            await categoryModel.findByIdAndDelete(req.params.id)
+            res.json({msg: "Delete a Category"})
+        } catch (error) {
+            return res.status(500).json({msg: error.message})
+        }
+    },
+    updateCategory: async (req, res) => {
+        try {
+            const {name} = req.body
+            await categoryModel.findByIdAndUpdate({_id: req.params.id}, {name})
+
+            res.json({msg: "Update a category"})
         } catch (error) {
             return res.status(500).json({msg: error.message})
         }
