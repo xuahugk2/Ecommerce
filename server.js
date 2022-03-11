@@ -18,11 +18,14 @@ app.use(fileUpload({
 import userRouter from './routes/userRouter.js'
 app.use('/user', userRouter)
 
-import categoryModel from "./models/categoryModel.js"
-app.use('/api', categoryModel)
+import categoryRouter from "./routes/categoryRouter.js"
+app.use('/api', categoryRouter)
 
 import upload from './routes/upload.js'
 app.use('/api', upload)
+
+import productRouter from './routes/productRouter.js'
+app.use('/api', productRouter)
 
 //Connect to MongoDB
 const URI = process.env.MONGO_URI
