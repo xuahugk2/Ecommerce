@@ -48,7 +48,6 @@ class APIfeatures {
 const productController = {
     getProducts: async(req, res) => {
         try {
-            console.log(req.query);
             const features = new APIfeatures(productModel.find(), req.query)
                 .filtering().sorting()
 
