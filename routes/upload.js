@@ -15,13 +15,12 @@ cloudinary.config({
 //Upload Image only admin can use
 router.post('/upload', (req, res) => {
     try {
-        console.log(req.files)
 
         if(!req.files || Object.keys(req.files).length === 0)
             return res.status(400).json({msg: 'No files were uploaded.'})
 
-        //const file = req.files.file
         const file = req.files.file
+        console.log(file);
 
         if(file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png'){
             removeTemp(file.tempFilePath)
@@ -32,15 +31,22 @@ router.post('/upload', (req, res) => {
             removeTemp(file.tempFilePath)
             return res.status(400).json({msg: 'Size too large.'})
         }
-
+        
         cloudinary.v2.uploader.upload(file.tempFilePath, {folder: 'test'},
-            async(err, result) => {
-                if(err) throw err
+            async result => {
+                //console.log(result);
 
                 removeTemp(file.tempFilePath)
 
-                res.json({public_id: result.public_id, url: result.secure_url})
-            })
+                console.log({result: result.public_id});
+
+                return res.json({
+                    public_id: "result.public_id", 
+                    url: "result.secure_url"
+                })
+        })
+
+        return res.json({msg: 'File upload fail.'})
             
     } catch (error) {
         return res.status(500).json({msg: error.message})
