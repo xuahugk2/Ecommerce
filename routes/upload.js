@@ -14,7 +14,7 @@ router.post('/upload', (req, res) => {
 
         const file = req.files.file
 
-        if(file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png'){
+        if(file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg'){
             removeTemp(file.tempFilePath)
             return res.status(400).json({msg: 'File format is incorrect.'})
         }
@@ -34,14 +34,14 @@ router.post('/upload', (req, res) => {
                 removeTemp(file.tempFilePath)
                 console.log({result: result});
 
-                return res.json({
+                return res.status(500).json({
                     public_id: result.public_id, 
-                    url: result.secure_url
+                    url: result.secure_url,
                 })
         })
 
 
-        return res.json({msg: 'File upload fail.'})
+        return res.status(400).json({msg: 'File upload fail.'})
             
     } catch (error) {
         return res.status(500).json({msg: error.message})
