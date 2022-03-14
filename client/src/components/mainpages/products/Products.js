@@ -4,11 +4,11 @@ import {GlobalSate} from '../../../GlobalSate'
 export default function Products() {
   const state = useContext(GlobalSate)
 
-  const [products] = state.ProductAPI.products
+  const [products] = state.productAPI.products
 
-  console.log(products);
+  console.log({msg: products});
 
   return (
-	<div>{products}</div>
+	  <div>Trang products</div>
   )
 }
