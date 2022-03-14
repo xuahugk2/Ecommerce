@@ -6,9 +6,9 @@ export default function Products() {
 
   const [products] = state.ProductAPI.products
 
-  console.log({msg: products})
+  console.log(products);
 
   return (
-    <div>Products List</div>
+	<div>{products}</div>
   )
 }

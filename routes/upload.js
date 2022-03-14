@@ -1,16 +1,9 @@
 import express from "express"
 const router = express.Router()
-import cloudinary from 'cloudinary'
+import cloudinary from './cloud/cloudinary.js'
 import auth from '../middleware/auth.js'
 import authAdmin from '../middleware/authAdmin.js'
 import fs from 'fs'
-
-
-cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.CLOUD_API_KEY,
-    api_secret: process.env.CLOUD_API_SECRET
-})
 
 //Upload Image only admin can use
 router.post('/upload', (req, res) => {
@@ -20,7 +13,6 @@ router.post('/upload', (req, res) => {
             return res.status(400).json({msg: 'No files were uploaded.'})
 
         const file = req.files.file
-        console.log(file);
 
         if(file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png'){
             removeTemp(file.tempFilePath)
@@ -32,19 +24,22 @@ router.post('/upload', (req, res) => {
             return res.status(400).json({msg: 'Size too large.'})
         }
         
-        cloudinary.v2.uploader.upload(file.tempFilePath, {folder: 'test'},
-            async result => {
-                //console.log(result);
+        cloudinary.upload(file.tempFilePath, {folder: "ecommerce"},
+            async (err, result) => {
+                if (err)
+                    console.log({Error: err});
+
+                console.log("File is being uploaded.");
 
                 removeTemp(file.tempFilePath)
-
-                console.log({result: result.public_id});
+                console.log({result: result});
 
                 return res.json({
-                    public_id: "result.public_id", 
-                    url: "result.secure_url"
+                    public_id: result.public_id, 
+                    url: result.secure_url
                 })
         })
+
 
         return res.json({msg: 'File upload fail.'})
             
@@ -59,7 +54,7 @@ router.post('/destroy', (req, res) => {
         const {public_id} = req.body
         if(!public_id) res.status(400).json({msg: 'No image selected'})
 
-        cloudinary.v2.uploader.destroy(public_id, async(err, result) => {
+        cloudinary.destroy(public_id, async(err, result) => {
             if(err) throw err
 
             res.json({mgs: 'Deleted Image'})
