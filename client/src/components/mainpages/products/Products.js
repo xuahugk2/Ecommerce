@@ -1,14 +1,19 @@
 import React, {useContext} from 'react'
 import {GlobalSate} from '../../../GlobalSate'
+import ProductItem from '../utils/productItem/ProductItem'
 
 export default function Products() {
   const state = useContext(GlobalSate)
 
-  const [products] = state.productAPI.products
-
-  console.log({msg: products});
-
+  const [products] = state.productsAPI.products
+  
   return (
-	  <div>Trang products</div>
+	  <div className='products'>
+      {
+        products.map(product => {
+          return <ProductItem key={product._id} product={product}/>
+        })
+      }
+    </div>
   )
 }

@@ -6,7 +6,7 @@ export default function ProductAPI() {
 
     const getProducts = async () => {
         const res = await axios.get('/api/products')
-        setProducts(res)
+        setProducts(res.data.products)
     }
 
     useEffect(() => {
