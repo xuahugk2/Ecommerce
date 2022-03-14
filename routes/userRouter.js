@@ -9,7 +9,7 @@ userRouter.post('/login', userController.login)
 
 userRouter.get('/logout', userController.logout)
 
-userRouter.get('/refresh-token', userController.refreshToken)
+userRouter.get('/refresh_token', userController.refreshToken)
 
 userRouter.get('/infor', auth, userController.getUser)
 
