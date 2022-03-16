@@ -56,12 +56,18 @@
     padding: 6px;
 }
 
-#btn_buy {
+#btn_buy, #btn_delete {
     background-color: #555;
     margin-right: 5px;
 }
 
-#btn_view {
+#btn_view, #btn_edit {
     background-color: teal;
     margin-left: 5px;
+}
+
+.product_card input {
+    position: absolute;
+    width: 20px;
+    height: 20px;
 }

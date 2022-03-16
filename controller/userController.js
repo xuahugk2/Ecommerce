@@ -118,6 +118,22 @@ const userController = {
         } catch (error) {
             return res.status(500).json({msg: error.message})
         }
+    },
+    addCart: async (req, res) => {
+        try {
+            const user = await userModel.findById(req.user.id)
+            if(!user) {
+                res.status(400).json({msg: 'User does not exists.'})
+            }
+
+            await userModel.findOneAndUpdate({_id: req.user.id}, {
+                cart: req.body.cart
+            })
+
+            return res.json({msg: 'Added to cart.'})
+        } catch (error) {
+            res.status(500).json({msg: error.message})
+        }
     }
 }
 

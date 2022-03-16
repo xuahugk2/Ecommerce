@@ -13,4 +13,6 @@ userRouter.get('/refresh_token', userController.refreshToken)
 
 userRouter.get('/infor', auth, userController.getUser)
 
+userRouter.patch('/addcart', auth, userController.addCart)
+
 export default userRouter
