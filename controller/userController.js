@@ -110,8 +110,8 @@ const userController = {
     },
     getUser: async (req, res) => {
         try {
-            const user = await userModel.findById(req.user.id).select('-password')
-            if(user) {
+            const user = await userModel.findById(req.user.id)//.select('-password')
+            if(!user) {
                 return res.status(400).json({msg: "User does not exists."})
             }
             res.json(user)

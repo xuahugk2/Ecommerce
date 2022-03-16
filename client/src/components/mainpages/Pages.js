@@ -8,6 +8,9 @@ import Cart from './cart/Cart'
 import NotFound from './utils/NotFound/NotFound'
 
 export default function Pages() {
+
+    const login = localStorage.getItem("firstLogin")
+
     return(
         <Routes>
             <Route path='/' element={<Products/>} />

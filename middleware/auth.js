@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 const auth = (req, res, next) => {
     try {
         const token = req.header('Authorization')
-        if(token) {
+        if(!token) {
             return res.status(400).json({msg: 'Invalid Authentication'})
         }
         
