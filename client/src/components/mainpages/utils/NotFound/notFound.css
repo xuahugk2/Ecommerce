@@ -1,3 +1,33 @@
 .wrapper {
-    background-image: url(https://bizflyportal.mediacdn.vn/bizflyportal/459/347/2020/06/02/17/37/70515910726734841.jpg);
+	width: 100%;
+	height: calc(100vh - 70px);
+	background-color: wheat;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.wrapper h1 {
+	display: block;
+	padding: 50px 0;
+	font-size: 70px;
+	width: 100%;
+}
+
+.wrapper a {
+	padding: 10px 15px;
+	background-color: greenyellow;
+	border: none;
+	border-radius: 12px;
+	transition: .5s;
+}
+
+.wrapper a:hover {
+	background-color: green;
+	color: white;
+}
+
+.wrapper a i {
+	margin-right: 10px;
+	font-size: 16px;
 }
