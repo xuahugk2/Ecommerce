@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import {GlobalSate} from '../../../GlobalSate'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import PaypalButton from './PaypalButton' 
 
 export default function Cart() {
 	const state = useContext(GlobalSate)
@@ -24,7 +24,7 @@ export default function Cart() {
 		getTotal()
 	}, [cart])
 
-	const addToCart = async () => {
+	const addToCart = async (cart) => {
 		await axios.patch('/user/addcart', {cart}, {
 			headers: {Authorization: token}
 		})
@@ -39,7 +39,7 @@ export default function Cart() {
 
 		setCart([...cart])
 
-		addToCart()
+		addToCart(cart)
 	}
 
 	const decrement = (id) => {
@@ -51,7 +51,7 @@ export default function Cart() {
 
 		setCart([...cart])
 
-		addToCart()
+		addToCart(cart)
 	}
 
 	const removeProduct = id => {
@@ -64,8 +64,22 @@ export default function Cart() {
 
 			setCart([...cart])
 
-			addToCart()
+			addToCart(cart)
 		}
+	}
+
+	const tranSuccess = async (payment) => {
+		console.log(payment);
+
+		const {paymentID, address} = payment
+
+		await axios.post('/api/payment', {cart, paymentID, address}, {
+			headers: {Authorization: token}
+		})
+
+		setCart([])
+		addToCart([])
+		alert('You have successfully placed an order.')
 	}
 	
 	if(cart.length === 0) {
@@ -101,7 +115,10 @@ export default function Cart() {
 
 			<div className="total">
 				<h3>total: $ {total}</h3>
-				<Link to='#!'>Payment</Link>
+				<PaypalButton 
+					total={total} 
+					tranSuccess={tranSuccess}
+					/>
 			</div>
 		</div>
 	)

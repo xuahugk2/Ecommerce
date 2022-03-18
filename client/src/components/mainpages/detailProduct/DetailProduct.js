@@ -9,6 +9,8 @@ export default function DetailProduct() {
 	const state = useContext(GlobalSate)
 
 	const [products] = state.productsAPI.products
+
+	const addCart = state.userAPI.addCart
 	
 	const [detail, setDetail] = useState([])
 
@@ -34,7 +36,10 @@ export default function DetailProduct() {
 					<span>$ {detail.price}</span>
 					<p>{detail.description}</p>
 					<p>Sold: {detail.sold}</p>
-					<Link to='/cart' className='cart'>Buy Now</Link>
+					<Link to='/cart' className='cart'
+					onClick={() => addCart(detail)}>
+						Buy Now
+					</Link>
 				</div>
 			</div>
 

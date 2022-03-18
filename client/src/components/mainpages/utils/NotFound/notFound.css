@@ -1,7 +1,6 @@
 .wrapper {
 	width: 100%;
 	height: calc(100vh - 70px);
-	background-color: wheat;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
@@ -16,15 +15,15 @@
 
 .wrapper a {
 	padding: 10px 15px;
-	background-color: greenyellow;
+	background-color: orange;
 	border: none;
 	border-radius: 12px;
-	transition: .5s;
+	transition: .3s;
+	font-size: 20px;
 }
 
 .wrapper a:hover {
-	background-color: green;
-	color: white;
+	opacity: 0.5;
 }
 
 .wrapper a i {

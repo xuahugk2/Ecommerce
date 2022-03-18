@@ -27,6 +27,9 @@ app.use('/api', upload)
 import productRouter from './routes/productRouter.js'
 app.use('/api', productRouter)
 
+import paymentRouter from './routes/paymentRouter.js'
+app.use('/api', paymentRouter)
+
 //Connect to MongoDB
 const URI = process.env.MONGO_URI
 mongoose.connect(URI, {
