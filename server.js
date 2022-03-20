@@ -1,10 +1,11 @@
-import dotenv from "dotenv";
+import dotenv from "dotenv"
 dotenv.config()
-import express  from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import fileUpload from "express-fileupload";
-import cookieParser from "cookie-parser";
+import express  from "express"
+import mongoose from "mongoose"
+import cors from "cors"
+import fileUpload from "express-fileupload"
+import cookieParser from "cookie-parser"
+import path from 'path'
 
 const app = express()
 app.use(express.json())
@@ -39,6 +40,13 @@ mongoose.connect(URI, {
     if (err) throw err
     console.log('Connected to MongoDB');
 })
+
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'))
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+    })
+}
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
