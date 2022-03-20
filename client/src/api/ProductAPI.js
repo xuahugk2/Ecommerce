@@ -1,17 +1,8 @@
-import {useState, useEffect} from 'react'
-import axios from 'axios'
+import {useState} from 'react'
+
 
 export default function ProductAPI() {
-    const [products, setProducts] = useState([])
-
-    const getProducts = async () => {
-        const res = await axios.get('/api/products')
-        setProducts(res.data.products)
-    }
-
-    useEffect(() => {
-        getProducts()
-    }, [])
+    const [products, setProducts] = useState([])    
 
     return {
         products: [products, setProducts]

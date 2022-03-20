@@ -6,7 +6,7 @@ import authAdmin from '../middleware/authAdmin.js'
 import fs from 'fs'
 
 //Upload Image only admin can use
-router.post('/upload', (req, res) => {
+router.post('/upload', auth, authAdmin, (req, res) => {
 	try {
 
 		if(!req.files || Object.keys(req.files).length === 0)
@@ -47,7 +47,7 @@ router.post('/upload', (req, res) => {
 })
 
 //Delete Image only admin can use
-router.post('/destroy', (req, res) => {
+router.post('/destroy', auth, authAdmin, (req, res) => {
 	try {
 		const {public_id} = req.body
 		if(!public_id) res.status(400).json({msg: 'No image selected'})
