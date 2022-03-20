@@ -55,3 +55,6 @@ button {
 
 /*---------- Not Found ----------*/
 @import url('./components/mainpages/utils/NotFound/notFound.css');
+
+/*---------- Order History ----------*/
+@import url('./components/mainpages/order/history.css');

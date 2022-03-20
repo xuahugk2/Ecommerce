@@ -10,6 +10,8 @@ export default function Cart() {
 
 	const [token] = state.token
 
+	const [callback, setCallback] = state.userAPI.callback
+
 	const [total, setTotal] = useState(0)
 
 	useEffect(() => {
@@ -78,6 +80,7 @@ export default function Cart() {
 		setCart([])
 		addToCart([])
 		alert('You have successfully placed an order.')
+		setCallback(!callback)
 	}
 	
 	if(cart.length === 0) {
