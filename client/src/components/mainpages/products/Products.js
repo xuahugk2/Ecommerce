@@ -3,6 +3,8 @@ import {GlobalSate} from '../../../GlobalSate'
 import ProductItem from '../utils/productItem/ProductItem'
 import Loading from '../utils/loading/Loading'
 import axios from 'axios'
+import Filter from './Filter'
+import LoadMore from './LoadMore'
 
 export default function Products() {
 	const state = useContext(GlobalSate)
@@ -72,6 +74,8 @@ export default function Products() {
 	
 	return (
 		<React.Fragment>
+			<Filter/>
+
 			{
 				isAdmin && 
 					<div className='delete-all'>
@@ -80,6 +84,7 @@ export default function Products() {
 						<button onClick={deleteAll}>Delete</button>
 					</div>
 			}
+
 			<div className='products'>
 				{
 					products.map(product => {
@@ -93,6 +98,9 @@ export default function Products() {
 					})
 				}
 			</div>
+
+			<LoadMore/>
+
 			{products.length === 0 && <Loading/>}
 		</React.Fragment>
 	)

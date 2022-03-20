@@ -1,4 +1,5 @@
 import categoryModel from '../models/categoryModel.js'
+import productModel from '../models/productModel.js'
 
 const categoryController = {
     getCategories: async (req, res) => {
@@ -27,6 +28,12 @@ const categoryController = {
     },
     deleteCategory: async (req, res) => {
         try {
+            const product = await productModel.findOne({category: req.params.id})
+            if(product) {
+                return res.status(400).json({
+                    msg: 'Please delete all products with a relationship.'
+                })
+            }
             await categoryModel.findByIdAndDelete(req.params.id)
             res.json({msg: "Delete a Category"})
         } catch (error) {
