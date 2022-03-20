@@ -18,16 +18,11 @@ export default function Login() {
 		e.preventDefault()
 
 		try {
-			const token = await axios.post('/user/login', {...user})
+			await axios.post('/user/login', {...user})
 
-			if(token) {
-				localStorage.setItem('firstLogin', true)
-	
-				window.location.href = "/"
-			}
-
+			window.location.href = "/"
 		} catch (error) {
-			//alert(error.response.data.msg)
+			alert(error.response.data.msg)
 		}
 	}
 

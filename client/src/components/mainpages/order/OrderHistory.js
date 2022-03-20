@@ -1,11 +1,36 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {GlobalSate} from '../../../GlobalSate'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 export default function OrderHistory() {
 	const state = useContext(GlobalSate)
 
-	const [history] = state.userAPI.history
+	const [history, setHistory] = state.userAPI.history
+
+	const [token] = state.token
+
+	const [isAdmin] = state.userAPI.isAdmin
+
+	useEffect(() => {
+		if(token) {			
+			const getHistory = async () => {
+				if(isAdmin) {
+					const res = await axios.get('/api/payment', {
+						headers: {Authorization: token}
+					})
+					setHistory(res.data)
+				} else {
+					const res = await axios.get('/user/history', {
+						headers: {Authorization: token}
+					})
+					setHistory(res.data)
+				}				
+			}
+
+			getHistory()
+		}
+	}, [token, isAdmin, setHistory])
 
 	return (
 		<div className="history-page">

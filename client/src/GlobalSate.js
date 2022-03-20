@@ -7,17 +7,20 @@ import CategoriesAPI from "./api/CategoriesAPI"
 export const GlobalSate = createContext()
 
 export const DataProvider = ({children}) => {
-    const [token, setToken] = useState(false)
-
-    const refreshToken = async () => {
-        const res = await axios.get('/user/refresh_token')
-
-        setToken(res.data.accessToken)
-    }
+    const [token, setToken] = useState(false)    
 
     useEffect(() => {
-        const firstLogin = localStorage.getItem('firstLogin')
-        if(firstLogin) refreshToken()
+        const refreshToken = async () => {
+            const res = await axios.get('/user/refresh_token')
+    
+            setToken(res.data.accessToken)
+
+            setTimeout(() => {
+                refreshToken()
+            }, 15000)
+        }
+        
+        refreshToken()
     }, [])
 
     const state = {

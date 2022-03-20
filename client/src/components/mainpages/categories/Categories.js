@@ -5,7 +5,7 @@ import axios from 'axios'
 export default function Categories() {
 	const state = useContext(GlobalSate)
 
-	const [categories, setCategories] = state.categoriesAPI.categories
+	const [categories] = state.categoriesAPI.categories
 
 	const [category, setCategory] = useState('')
 
