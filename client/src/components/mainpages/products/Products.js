@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useState} from 'react'
 import {GlobalSate} from '../../../GlobalSate'
 import ProductItem from '../utils/productItem/ProductItem'
 import Loading from '../utils/loading/Loading'
@@ -9,19 +9,77 @@ export default function Products() {
 
 	const [products, setProducts] = state.productsAPI.products
 
-	const [isAdmin] = state.userAPI.isAdmin	
+	const [isAdmin] = state.userAPI.isAdmin
+	
+	const [token] = state.token
 
-    useEffect(() => {
-		const getProducts = async () => {
-			const res = await axios.get('/api/products')
-			setProducts(res.data.products)
+	const [callback, setCallback] = state.productsAPI.callback
+
+	const [loading, setLoading] = useState(false)
+
+	const [isChecked, setIsChecked] = useState(false)
+
+	const handleCheck = (id) => {
+		products.forEach(product => {
+			if(product._id === id) {
+				product.checked = !product.checked
+			}
+		})
+
+		setProducts([...products])
+	}
+
+	const deleteProduct = async (id, public_id) => {
+		try {
+			setLoading(true)
+			const destroyImage = axios.post('/api/destroy', {public_id}, {
+				headers: {Authorization: token}
+			})
+
+			const deleteProduct = axios.delete(`/api/products/${id}`, {
+				headers: {Authorization: token}
+			})
+
+			await destroyImage
+			await deleteProduct
+			setLoading(false)
+			setCallback(!callback)
+		} catch (error) {
+			alert(error.response.data.msg)
 		}
+	}
 
-        getProducts()
-    }, [setProducts])
+	const checkAll = () => {
+		products.forEach(product => {
+			product.checked = !isChecked
+		})
+
+		setProducts([...products])
+		setIsChecked(!isChecked)
+	}
+
+	const deleteAll = async () => {
+		products.forEach(product => {
+			if(product.checked) {
+				deleteProduct(product._id, product.images.public_id)
+			}
+		})
+	}
+
+	if(loading) {
+		return <div><Loading/></div>
+	}
 	
 	return (
 		<React.Fragment>
+			{
+				isAdmin && 
+					<div className='delete-all'>
+						<span htmlFor='check'>Select All</span>
+						<input name='check' type="checkbox" checked={isChecked} onChange={checkAll} />
+						<button onClick={deleteAll}>Delete</button>
+					</div>
+			}
 			<div className='products'>
 				{
 					products.map(product => {
@@ -29,6 +87,8 @@ export default function Products() {
 									key={product._id}
 									product={product}
 									isAdmin={isAdmin}
+									deleteProduct={deleteProduct}
+									handleCheck={handleCheck}
 								/>
 					})
 				}

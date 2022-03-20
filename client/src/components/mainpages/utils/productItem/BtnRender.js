@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {GlobalSate} from '../../../../GlobalSate'
 
-export default function BtnRender({product}) {
+export default function BtnRender({product, deleteProduct}) {
 	const state = useContext(GlobalSate)
 
 	const [isAdmin] = state.userAPI.isAdmin
@@ -14,7 +14,7 @@ export default function BtnRender({product}) {
 			{
 				isAdmin ? 
 					<React.Fragment>
-						<Link id='btn_delete' to='#!'>
+						<Link id='btn_delete' to='#!' onClick={() => deleteProduct(product._id, product.images.public_id)}>
 							Delete
 						</Link>
 						<Link id='btn_edit' to={`/edit_product/${product._id}`}>

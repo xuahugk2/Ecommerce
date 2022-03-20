@@ -21,6 +21,8 @@ export default function CreateProduct() {
 
 	const [products] = state.productsAPI.products
 
+	const [callback, setCallback] = state.productsAPI.callback
+
 	const [categories] = state.categoriesAPI.categories
 
 	const [images, setImages] = useState(false)
@@ -126,24 +128,19 @@ export default function CreateProduct() {
 				}
 
 				if(onEdit) {
-					await axios.put(`/api/products/${product._id}`, {...product, images}, {
+					const res = await axios.put(`/api/products/${product._id}`, {...product, images}, {
 						headers: {Authorization: token}
 					})
+					alert(res.data.msg)
 				} else {
-					await axios.post('/api/products', {...product, images}, {
+					const res = await axios.post('/api/products', {...product, images}, {
 						headers: {Authorization: token}
 					})
-				}				
-
-				setImages(false)
-				setProduct(initialState)
-				history.push('/')
-
-				if(onEdit) {
-					alert('Created a product.')					
-				} else {
-					alert('Updated a product.')					
+					alert(res.data.msg)
 				}
+
+				setCallback(!callback)
+				history.push('/')				
 			} else {
 				alert("You're not an admin.")
 			}

@@ -1,11 +1,13 @@
 import React from 'react'
 import BtnRender from './BtnRender'
 
-export default function ProductItem({product, isAdmin}) {
+export default function ProductItem({product,isAdmin, deleteProduct, handleCheck}) {
+
 	return (
 		<div className='product_card'>
 			{
-				isAdmin && <input type="checkbox" checked={product.checked} name="" id="" />
+				isAdmin && <input type="checkbox" checked={product.checked}
+								onChange={() => handleCheck(product._id)}/>
 			}
 
 			<img
@@ -20,7 +22,7 @@ export default function ProductItem({product, isAdmin}) {
 				<p>{product.description}</p>
 			</div>
 
-			<BtnRender product={product}/>
+			<BtnRender product={product} deleteProduct={deleteProduct}/>
 		</div>
 	)
 }
