@@ -1,35 +1,41 @@
 {
-  "name": "ecommerce",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "type": "module",
-  "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "cd client && npm run start",
-    "server-install": "npm install",
-    "client-install": "cd client && npm install",
-    "install-all": "concurrently \"npm run server-install\" \"npm run client-install\"",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm run build"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "cloudinary": "^1.28.1",
-    "concurrently": "^7.0.0",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
-    "express-fileupload": "^1.3.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.3"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  }
+	"name": "ecommerce",
+	"version": "1.0.0",
+	"description": "",
+	"homepage": "https://xuahugk2.github.io/Ecommerce/",
+	"main": "server.js",
+	"type": "module",
+	"scripts": {
+		"build": "react-scripts build",
+		"start": "node server.js",
+		"server": "nodemon server.js",
+		"client": "cd client && npm run start",
+		"server-install": "npm install",
+		"client-install": "cd client && npm install",
+		"install-all": "concurrently \"npm run server-install\" \"npm run client-install\"",
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"heroku-postbuild": "cd client && npm install && npm run build",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.0.1",
+		"cloudinary": "^1.28.1",
+		"concurrently": "^7.0.0",
+		"cookie-parser": "^1.4.6",
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.0",
+		"express": "^4.17.3",
+		"express-fileupload": "^1.3.1",
+		"gh-pages": "^3.2.3",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^6.2.3",
+		"react-scripts": "^5.0.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	}
 }
