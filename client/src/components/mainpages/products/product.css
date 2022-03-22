@@ -67,4 +67,10 @@
     margin-bottom: 20px;
     border: 1px solid #555;
     text-transform: capitalize;
+    transition: .1s;
+}
+
+.load_more button:hover {
+    font-weight: 700;
+    border: 2px solid #555;
 }

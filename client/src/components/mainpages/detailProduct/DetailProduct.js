@@ -14,15 +14,32 @@ export default function DetailProduct() {
 	
 	const [detail, setDetail] = useState([])
 
-	useEffect(() => {
+	const [loading, setLoading] = useState(false)
+
+	useEffect(() => {		
 		if(params.id){
 			products.forEach(product => {
 				if(product._id === params.id) setDetail(product)
 			});
-		}
-	}, [params.id, products])
+		}		
+
+	}, [params.id, products, detail])
 
 	if(detail.length === 0) return null
+
+	const capitalizeLetter = (string) => {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
+	const capitalizeTitle = (string) => {
+		const titles = string.split(' ')
+		const newTitle = titles.map(title => {
+				return capitalizeLetter(title)
+		})
+		return newTitle.join(' ')
+	}
+
+	document.title = capitalizeTitle(detail.title)
 
 	return (
 		<React.Fragment>
@@ -31,9 +48,8 @@ export default function DetailProduct() {
 				<div className='box-detail'>
 					<div className='row'>
 						<h2>{detail.title}</h2>
-						<h6>#id: {detail.product_id}</h6>
 					</div>
-					<span>$ {detail.price}</span>
+					<span>{`Price: $${detail.price}`}</span>
 					<p>{detail.description}</p>
 					<p>Sold: {detail.sold}</p>
 					<Link to='/cart' className='cart'
@@ -55,6 +71,6 @@ export default function DetailProduct() {
 					}
 				</div>
 			</div>
-		</React.Fragment>
+		</React.Fragment>		
   	)
 }

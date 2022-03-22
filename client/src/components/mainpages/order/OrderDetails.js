@@ -21,6 +21,8 @@ export default function OrderDetails() {
 
 	if(orderDetails.length === 0) return null
 
+	document.title = 'Order Detail'
+
 	return (
 		<div className='history-page'>
 			<table> 

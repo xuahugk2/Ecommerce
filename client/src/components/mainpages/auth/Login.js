@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import Loading from '../utils/loading/Loading'
 
 export default function Login() {
 	const [user, setUser] = useState({
 		email: '',
 		password: ''
 	})
+
+	const [loading, setLoading] = useState(false)
 
 	const onChangeInput = (e) => {
 		const {name, value} = e.target
@@ -16,6 +19,8 @@ export default function Login() {
 
 	const loginSubmit = async (e) => {
 		e.preventDefault()
+
+		setLoading(true)
 
 		try {
 			await axios.post('/user/login', {...user})
@@ -27,6 +32,12 @@ export default function Login() {
 			alert(error.response.data.msg)
 		}
 	}
+
+	if(loading) {
+		return <div><Loading/></div>
+	}
+
+	document.title = 'Login'
 
 	return (
 		<div className='auth-page'>

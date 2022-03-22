@@ -41,6 +41,7 @@ export default function CreateProduct() {
 
 	useEffect(() => {
 		if(param.id) {
+			document.title = 'Update Product'
 			setOnEdit(true)
 			products.forEach(item => {
 				if(item._id === param.id) {
@@ -49,6 +50,7 @@ export default function CreateProduct() {
 				}
 			})
 		} else {
+			document.title = 'Create Product'
 			setOnEdit(false)
 			setProduct(initialState)
 			setImages(false)

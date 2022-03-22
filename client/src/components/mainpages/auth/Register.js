@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import Loading from '../utils/loading/Loading'
 
 export default function Register() {
 	const [user, setUser] = useState({
@@ -8,6 +9,8 @@ export default function Register() {
 		email: '',
 		password: ''
 	})
+
+	const [loading, setLoading] = useState(false)
 
 	const onChangeInput = (e) => {
 		const {name, value} = e.target
@@ -17,6 +20,8 @@ export default function Register() {
 
 	const registerSubmit = async (e) => {
 		e.preventDefault()
+
+		setLoading(true)
 
 		try {
 			await axios.post('/user/register', {...user})
@@ -28,6 +33,12 @@ export default function Register() {
 			alert(error.response.data.msg)
 		}
 	}
+
+	if(loading) {
+		return <div><Loading/></div>
+	}
+
+	document.title = 'Register'
 
 	return (
 		<div className='auth-page'>

@@ -61,6 +61,8 @@ export default function Categories() {
 		}
 	}
 
+	document.title = 'Categories'
+
 	return (
 		<div className='categories'>
 			<form onSubmit={createCategory}>

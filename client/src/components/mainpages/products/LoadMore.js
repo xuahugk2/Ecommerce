@@ -11,7 +11,7 @@ export default function LoadMore() {
 	return (
 		<div className='load_more'>
 			{
-				result < page * 9 
+				result < page * 4
 					? '' 
 					: <button onClick={() => setPage(page + 1)}>Load More</button>
 			}

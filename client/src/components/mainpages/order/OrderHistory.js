@@ -12,6 +12,8 @@ export default function OrderHistory() {
 
 	const [isAdmin] = state.userAPI.isAdmin
 
+	document.title = 'History'
+
 	useEffect(() => {
 		if(token) {			
 			const getHistory = async () => {

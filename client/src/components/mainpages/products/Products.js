@@ -71,6 +71,8 @@ export default function Products() {
 	if(loading) {
 		return <div><Loading/></div>
 	}
+
+	document.title = 'DauCatMoi'
 	
 	return (
 		<React.Fragment>

@@ -1,7 +1,8 @@
 import React, {useContext, useState, useEffect} from 'react'
 import {GlobalSate} from '../../../GlobalSate'
 import axios from 'axios'
-import PaypalButton from './PaypalButton' 
+import PaypalButton from './PaypalButton'
+import Loading from '../utils/loading/Loading'
 
 export default function Cart() {
 	const state = useContext(GlobalSate)
@@ -12,7 +13,10 @@ export default function Cart() {
 
 	const [total, setTotal] = useState(0)
 
+	const [loading, setLoading] = useState(false)
+
 	useEffect(() => {
+		setLoading(true)
 		const getTotal = () => {
 			const total = cart.reduce((prev, item) => {
 				return prev + (item.price * item.quantity)
@@ -22,6 +26,7 @@ export default function Cart() {
 		}
 
 		getTotal()
+		setLoading(false)
 	}, [cart])
 
 	const addToCart = async (cart) => {
@@ -79,6 +84,12 @@ export default function Cart() {
 		addToCart([])
 		alert('You have successfully placed an order.')
 	}
+
+	if(loading) {
+		return <div><Loading/></div>
+	}
+
+	document.title = 'Cart'
 	
 	if(cart.length === 0) {
 		return <h2 style={{textAlign: "center", fontSize: "5rem"}}>Cart Empty</h2>
@@ -93,16 +104,14 @@ export default function Cart() {
 						
 						<div className='box-detail'>
 							<h2>{product.title}</h2>
-							<h3>$ {product.price * product.quantity}</h3>
+							<h3>{`$${product.price * product.quantity}`}</h3>
 							<p>{product.description}</p>
 							<p>Sold: {product.sold}</p>
-
 							<div className="amount">
 								<button onClick={() => decrement(product._id)}> - </button>
 								<span>{product.quantity}</span>
 								<button onClick={() => increment(product._id)}> + </button>
 							</div>
-							
 							<div className="delete" onClick={() => removeProduct(product._id)}>
 								X
 							</div>
@@ -112,7 +121,7 @@ export default function Cart() {
 			}
 
 			<div className="total">
-				<h3>total: $ {total}</h3>
+				<h3>{`Total: $${total}`}</h3>
 				<PaypalButton 
 					total={total} 
 					tranSuccess={tranSuccess}
