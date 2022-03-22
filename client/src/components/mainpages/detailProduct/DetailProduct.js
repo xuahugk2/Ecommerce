@@ -14,8 +14,6 @@ export default function DetailProduct() {
 	
 	const [detail, setDetail] = useState([])
 
-	const [loading, setLoading] = useState(false)
-
 	useEffect(() => {		
 		if(params.id){
 			products.forEach(product => {
