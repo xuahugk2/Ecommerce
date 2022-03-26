@@ -19,7 +19,6 @@ export default function ListContact() {
 						headers: {Authorization: token}
 					})
 					setContacts(res.data)
-					console.log(res.data)
 				}
 			}
 
