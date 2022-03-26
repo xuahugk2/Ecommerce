@@ -13,6 +13,17 @@
     float: left;
 }
 
+.contact-row select {
+    margin: 0 15px;
+    width: 170px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.contact-row select option {
+    font-size: 16px;
+}
+
 .col-6 .contact-info {
     margin: 30px 50px;
 }

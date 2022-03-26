@@ -149,9 +149,9 @@ const userController = {
 	},
 	contact: async (req, res) => {
 		try {
-			const {name, content} = req.body
+			const {name, email, tel, description, type} = req.body
 
-			return res.json({name, content})
+			return res.json({name, email, tel, description, type})
 		} catch (error) {
 			return res.status(500).json({msg: error.message})
 		}

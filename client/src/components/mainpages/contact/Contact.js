@@ -7,8 +7,9 @@ export default function Contact() {
 	const [contact, setContact] = useState([{
 		name: '',
 		email: '',
-		tel: 0,
-		content: ''
+		tel: '',
+		description: '',
+		type: 'Cart'
 	}]) 
 
 	const onChangeInput = (e) => {
@@ -49,8 +50,19 @@ export default function Contact() {
 						</div>
 						
 						<div className="contact-row">
-							<label htmlFor="content">Description</label><br />
-							<textarea type="text" name='content' id='content' required placeholder='Describe your problem...' value={contact.content} onChange={onChangeInput} rows='7'/>
+							<label htmlFor="description">Description</label><br />
+							<textarea type="text" name='description' id='description' required placeholder='Describe your problem...' value={contact.description} onChange={onChangeInput} rows='7'/>
+						</div>
+
+						<div className="contact-row">
+							<label htmlFor="type">What is your problem</label>
+							<select name="type" id="type" value={contact.type}>
+								<option value="Cart">Cart</option>
+								<option value="Auth">Login / Register</option>
+								<option value="Products">Products</option>
+								<option value="History">Order History</option>
+								<option value="Payment">Payment</option>
+							</select>
 						</div>
 						
 						<button type="submit">Send</button>
@@ -67,9 +79,9 @@ export default function Contact() {
 							<p>Phone Number: <a href='tel:(+84) 123456789'>(+84) 123456789</a></p>
 							
 							<p>Follow us: 
-								<a className='social-link' href='www.facebook.com'><i class="fa-brands fa-facebook"></i></a>
-								<a className='social-link' href='www.instagram.com'><i class="fa-brands fa-instagram-square"></i></a>
-								<a className='social-link' href='www.youtube.com'><i class="fa-brands fa-youtube"></i></a>
+								<a className='social-link' href='www.facebook.com'><i className="fa-brands fa-facebook"></i></a>
+								<a className='social-link' href='www.instagram.com'><i className="fa-brands fa-instagram-square"></i></a>
+								<a className='social-link' href='www.youtube.com'><i className="fa-brands fa-youtube"></i></a>
 							
 							</p>
 						</div>
