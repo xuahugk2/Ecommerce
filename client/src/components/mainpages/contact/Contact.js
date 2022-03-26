@@ -27,6 +27,9 @@ export default function Contact() {
 			return alert(error.response.data.msg)
 		}
 	}
+
+	document.title = 'Contact'
+
 	return (
 		<div className='contact-page'>
 			<h2>Contact</h2>

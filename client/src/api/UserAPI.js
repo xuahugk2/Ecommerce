@@ -10,6 +10,8 @@ export default function UserAPI(token) {
 
 	const [history, setHistory] = useState([])
 
+	const [contacts, setContacts] = useState([])
+
 	useEffect(() => {
 		if(token) {
 			const getUser = async () => {
@@ -54,6 +56,7 @@ export default function UserAPI(token) {
 		isAdmin: [isAdmin, setIsAdmin],
 		cart: [cart, setCart],
 		addCart: addCart,
-		history: [history, setHistory]
+		history: [history, setHistory],
+		contacts: [contacts, setContacts]
 	}
 }
