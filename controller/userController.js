@@ -146,6 +146,16 @@ const userController = {
 		} catch (error) {
 			return res.status(500).json({msg: err.message})
 		}
+	},
+	contact: async (req, res) => {
+		try {
+			const {name} = req.body
+
+			return res.json('Contact saved.')
+		} catch (error) {
+			return res.status(500).json({msg: error.message})
+		}
+		
 	}
 }
 

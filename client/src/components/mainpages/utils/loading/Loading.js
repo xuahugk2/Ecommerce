@@ -3,24 +3,27 @@ import './loading.css'
 
 export default function Loading() {
   return (
-	<div className='load-page'>
-		<div className="loader">
-			<div>
-				<div>
-					<div>
-						<div>
-							<div>
-								<div>
-									<div>
-										<div></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	// <div className='loading-page'>
+	// 	<div className="loading">
+	// 		<div>
+	// 			<div>
+	// 				<div>
+	// 					<div>
+	// 						<div>
+	// 							<div>
+	// 								<div>
+	// 									<div></div>
+	// 								</div>
+	// 							</div>
+	// 						</div>
+	// 					</div>
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 	</div>
+	// </div>
+	<div className='loader-page'>	
+		<div className="loader"></div>
 	</div>
   )
 }

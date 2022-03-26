@@ -1,28 +1,48 @@
-.load-page {
-    background-color: #fff;
-    overflow: hidden;
+/*---------------------- Loading ----------------------*/
+.loading-page {
+	background-color: #fff;
+	overflow: hidden;
 }
 
-.loader {
-    width: 300px;
-    height: 300px;
-    margin: auto;
+.loading {
+	width: 300px;
+	height: 300px;
+	margin: auto;
 }
 
-.loader div {
-    width: calc(100% - 15px);
-    height: calc(100% - 15px);
-    border: 2px solid #fff;
-    border-top: 2px solid crimson;
-    border-radius: 50%;
-    animation: rotate 10s linear infinite alternate-reverse;
+.loading div {
+	width: calc(100% - 15px);
+	height: calc(100% - 15px);
+	border: 2px solid #fff;
+	border-top: 2px solid crimson;
+	border-radius: 50%;
+	animation: rotate 10s linear infinite alternate-reverse;
 }
 
 @keyframes rotate {
-    50%{
-        transform: rotate(80deg);
-    }
-    100%{
-        transform: rotate(360deg);
-    }
+	50%{
+		transform: rotate(80deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+
+/*---------------------- Loader ----------------------*/
+.loader {
+	border: 16px solid #f3f3f3;
+	border-top: 16px solid blue;
+	border-right: 16px solid green;
+	border-bottom: 16px solid red;
+	border-left: 16px solid pink;
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	margin: auto calc(calc(100% - 120px) / 2);
+	animation: spin 2s linear infinite;
+}
+  
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
 }

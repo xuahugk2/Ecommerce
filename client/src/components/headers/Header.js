@@ -61,6 +61,8 @@ export default function Header() {
 			</div>
 
 			<ul style={styleMenu}>
+				<li><Link to='/contact'>Contact</Link></li>
+
 				<li><Link to='/'>{isAdmin ? 'Products' : 'Shop'}</Link></li>
 
 				{isAdmin && adminRouter()}
@@ -81,9 +83,7 @@ export default function Header() {
 							<img src={Cart} alt='' width='30'/>
 						</Link>
 					</div>
-			}
-
-			
+			}			
 		</header>
 	)
 }

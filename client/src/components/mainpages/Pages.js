@@ -11,6 +11,7 @@ import OrderHistory from './order/OrderHistory'
 import OrderDetails from './order/OrderDetails'
 import Categories from './categories/Categories'
 import CreateProduct from './createProduct/CreateProduct'
+import Contact from './contact/Contact'
 
 export default function Pages() {
     const state = useContext(GlobalSate)
@@ -35,6 +36,8 @@ export default function Pages() {
             <Route path='/category' element={isAdmin ? <Categories/> : <NotFound/>} />
             <Route path='/create_product' element={isAdmin ? <CreateProduct/> : <NotFound/>} />
             <Route path='/edit_product/:id' element={isAdmin ? <CreateProduct/> : <NotFound/>} />
+
+            <Route path='/contact' element={isLogged ? <Contact/> : <Contact/>} />
 
             <Route path='*' element={<NotFound/>} />
         </Routes>
