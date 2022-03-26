@@ -17,6 +17,6 @@ userRouter.patch('/addcart', auth, userController.addCart)
 
 userRouter.get('/history', auth, userController.history)
 
-userRouter.get('/contact', userController.contact)
+userRouter.post('/contact', userController.contact)
 
 export default userRouter

@@ -1,0 +1,58 @@
+.contact-page > h2 {
+    text-align: center;
+    font-size: 50px;
+}
+
+.contact-page .contact-row {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.contact-row .col-6 {
+    width: 49%;
+    float: left;
+}
+
+.col-6 .contact-info {
+    margin: 30px 50px;
+}
+
+.contact-info .info-detail {
+    margin: 10px 20px;
+}
+
+.info-detail p {
+    width: 100%;
+    max-height: 25px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    height: 70px;
+    overflow: hidden;
+    color: #323232;
+    margin: 10px 0;
+}
+
+.info-detail .social-link {
+    margin-left: 20px;
+    font-size: 20px;
+    color: black;
+}
+
+.contact-row input {
+    width: 100%;
+}
+
+.contact-page .contact-form {
+    position: relative;
+}
+
+.contact-form button {
+    background-color: greenyellow;
+    border-radius: 13px;
+    font-size: 16px;
+    padding: 0 15px;
+    position: absolute;
+    bottom: -15;
+    right: 0;
+}
