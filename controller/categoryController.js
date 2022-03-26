@@ -7,7 +7,7 @@ const categoryController = {
            const categories = await categoryModel.find()
            res.json(categories)
        } catch (error) {
-           return res.status(500).json({msg: error.message})
+           return res.status(500).json({msg: 'Can not get any category.'})
        }
     },
     createCategory: async (req, res) => {
@@ -21,9 +21,9 @@ const categoryController = {
             const newCategory = new categoryModel({name})
 
             await newCategory.save()
-            res.json({msg: "Create a category"})
+            res.json({msg: "Create a category."})
         } catch (error) {
-            return res.status(500).json({msg: error.message})
+            return res.status(500).json({msg: 'Can not create this category.'})
         }
     },
     deleteCategory: async (req, res) => {
@@ -35,9 +35,9 @@ const categoryController = {
                 })
             }
             await categoryModel.findByIdAndDelete(req.params.id)
-            res.json({msg: "Delete a Category"})
+            res.json({msg: "Delete a Category."})
         } catch (error) {
-            return res.status(500).json({msg: error.message})
+            return res.status(500).json({msg: 'Can not delete this category.'})
         }
     },
     updateCategory: async (req, res) => {
@@ -45,9 +45,9 @@ const categoryController = {
             const {name} = req.body
             await categoryModel.findByIdAndUpdate({_id: req.params.id}, {name})
 
-            res.json({msg: "Update a category"})
+            res.json({msg: "Update a category."})
         } catch (error) {
-            return res.status(500).json({msg: error.message})
+            return res.status(500).json({msg: 'Can not update this category.'})
         }
     }
 }

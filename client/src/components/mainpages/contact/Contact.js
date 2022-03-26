@@ -1,16 +1,14 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {GlobalSate} from '../../../GlobalSate'
+import React, {useState} from 'react'
 import axios from 'axios'
 
 export default function Contact() {
 
-	const [contact, setContact] = useState([{
-		name: '',
-		email: '',
-		tel: '',
-		description: '',
-		type: 'Cart'
-	}]) 
+	const [contact, setContact] = useState({
+		name: 'Do Trong Nhan',
+		email: 'nhan@gmail.com',
+		tel: '0123456789',
+		description: 'Contact demo'
+	}) 
 
 	const onChangeInput = (e) => {
 		const {name, value} = e.target
@@ -23,7 +21,8 @@ export default function Contact() {
 
 		try {
 			const res = await axios.post('/user/contact', {...contact})
-			console.log(res.data);
+
+			alert(res.data.msg);
 		} catch (error) {
 			return alert(error.response.data.msg)
 		}
@@ -52,17 +51,6 @@ export default function Contact() {
 						<div className="contact-row">
 							<label htmlFor="description">Description</label><br />
 							<textarea type="text" name='description' id='description' required placeholder='Describe your problem...' value={contact.description} onChange={onChangeInput} rows='7'/>
-						</div>
-
-						<div className="contact-row">
-							<label htmlFor="type">What is your problem</label>
-							<select name="type" id="type" value={contact.type}>
-								<option value="Cart">Cart</option>
-								<option value="Auth">Login / Register</option>
-								<option value="Products">Products</option>
-								<option value="History">Order History</option>
-								<option value="Payment">Payment</option>
-							</select>
 						</div>
 						
 						<button type="submit">Send</button>

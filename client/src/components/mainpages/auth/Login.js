@@ -29,7 +29,7 @@ export default function Login() {
 
 			window.location.href = "/"
 		} catch (error) {
-			alert(error.response.data.msg)
+			if(error) alert(error.response.data.msg)
 		}
 	}
 

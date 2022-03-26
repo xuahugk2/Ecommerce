@@ -9,7 +9,7 @@ const paymentController = {
 
 			res.json(payments)
 		} catch (error) {
-			return res.status(500).json({msg: error.message})
+			return res.status(500).json({msg: 'Can not get any payment.'})
 		}
 	},
 	createPayments: async (req, res) => {
@@ -35,9 +35,9 @@ const paymentController = {
 			})
 			
 			await newPayment.save()
-			res.json({msg: 'Payment success.'})
+			res.json({msg: 'Your order is successfully paid.'})
 		} catch (error) {
-			return res.status(500).json({msg: error.message})
+			return res.status(500).json({msg: 'Can not make a payment now.'})
 		}
 	}
 }

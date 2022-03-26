@@ -1,6 +1,7 @@
 
 import userModel from "../models/userModel.js"
 import paymentModel from '../models/paymentModel.js'
+import contactModel from "../models/contactModel.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
@@ -48,7 +49,7 @@ const userController = {
 			//res.json({msg: "Register Success!"})
 			
 		} catch (error) {
-			return res.status(500).json({msg: `Error: ${error.message}`})
+			return res.status(500).json({msg: 'Please try to register again.'})
 		}
 		
 	},
@@ -79,7 +80,7 @@ const userController = {
 			res.json({accessToken})
 
 		} catch (error) {
-			return res.status(500).json({msg: error.message})
+			return res.status(500).json({msg: 'Please try logging in again.'})
 		}
 	},
 	logout: async (req, res) => {
@@ -87,7 +88,7 @@ const userController = {
 			res.clearCookie('refreshToken', {path: '/user/refresh_token'})
 			return res.json({msg: "Logged out."})
 		} catch (error) {
-			return res.status(500).json({msg: error.message})
+			return res.status(500).json({msg: 'error when logging out.'})
 		}
 	},
 	refreshToken: (req, res) => {
@@ -95,12 +96,12 @@ const userController = {
 			const rf_token = req.cookies.refreshToken
 
 			if(!rf_token) {
-				return res.status(400).json({msg: "Please Login or Register"})
+				return res.status(400).json({msg: "Please login or register."})
 			}
 
 			jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
 				if(err) {
-					return res.status(400).json({msg: "Please Login or Register"}) 
+					return res.status(400).json({msg: "Please login or register"}) 
 				}
 				const accessToken = createAccessToken({id: user.id})
 				res.json({user, accessToken})
@@ -108,7 +109,7 @@ const userController = {
 
 			res.json({rf_token})
 		} catch (error) {
-			return res.status(500).json({msg: error.message})
+			return res.status(500).json({msg: 'Error when refresh token'})
 		}
 	},
 	getUser: async (req, res) => {
@@ -119,7 +120,7 @@ const userController = {
 			}
 			res.json(user)
 		} catch (error) {
-			return res.status(500).json({msg: error.message})
+			return res.status(500).json({msg: 'Can not find current user.'})
 		}
 	},
 	addCart: async (req, res) => {
@@ -133,9 +134,9 @@ const userController = {
 				cart: req.body.cart
 			})
 
-			return res.json({msg: 'Added to cart.'})
+			return res.json({msg: 'Added the product to cart.'})
 		} catch (error) {
-			res.status(500).json({msg: error.message})
+			res.status(500).json({msg: 'Fail to add the product to cart.'})
 		}
 	},
 	history: async (req, res) => {
@@ -144,18 +145,33 @@ const userController = {
 
 			res.json(history)
 		} catch (error) {
-			return res.status(500).json({msg: err.message})
+			return res.status(500).json({msg: 'Can not your order history.'})
 		}
 	},
 	contact: async (req, res) => {
 		try {
-			const {name, email, tel, description, type} = req.body
+			const {name, email, tel, description} = req.body
 
-			return res.json({name, email, tel, description, type})
+			const newContact = new contactModel({
+				name, email, tel, description
+			})
+
+			newContact.save()
+
+			res.json({msg: 'Your contact is saved.'})
 		} catch (error) {
-			return res.status(500).json({msg: error.message})
+			return res.status(500).json({msg: 'Can not save your contact now.'})
 		}
 		
+	},
+	getContact: async (req, res) => {
+		try {
+			const contacts = await contactModel.find()
+
+			res.json(contacts)
+		} catch (error) {
+			return res.status(500).json({msg: 'Can not get any contact from the customer.'})
+		}
 	}
 }
 

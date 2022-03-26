@@ -61,7 +61,7 @@ export default function Header() {
 			</div>
 
 			<ul style={styleMenu}>
-				<li><Link to='/contact'>Contact</Link></li>
+				<li>{isAdmin ? <Link to='/contacts'>Contacts</Link> : <Link to='/contact'>Contact</Link>}</li>
 
 				<li><Link to='/'>{isAdmin ? 'Products' : 'Shop'}</Link></li>
 

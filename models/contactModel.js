@@ -19,11 +19,6 @@ const contactModel = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    },
-    type: {
-        type: String,
-        required: true,
-        default: 'Cart'
     }
 }, {
     timestamps: true

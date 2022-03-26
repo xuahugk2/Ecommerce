@@ -59,7 +59,7 @@ const productController = {
                 products: products
             })
         } catch (error) {
-           return res.status(500).json({msg: error.message}) 
+           return res.status(500).json({msg: 'Can not get any product.'}) 
         }
     },
     createProduct: async(req, res) => {
@@ -86,18 +86,18 @@ const productController = {
 
             await newProduct.save()
 
-            res.json({msg: "Created a product"})
+            res.json({msg: "Created a product."})
         } catch (error) {
-           return res.status(500).json({msg: error.message}) 
+           return res.status(500).json({msg: 'Can not create this product.'}) 
         }
     },
     deleteProduct: async(req, res) => {
         try {
             await productModel.findByIdAndDelete(req.params.id)
 
-            res.json({msg: "Deleted a Product"})
+            res.json({msg: "Deleted a product."})
         } catch (error) {
-           return res.status(500).json({msg: error.message}) 
+           return res.status(500).json({msg: 'Can not delete this product.'}) 
         }
     },
     updateProduct: async(req, res) => {
@@ -111,9 +111,9 @@ const productController = {
                 title: title.toLowerCase(), price, description, content, images, category
             })
 
-            res.json({msg: "Updated a product"})
+            res.json({msg: "Updated a product."})
         } catch (error) {
-           return res.status(500).json({msg: error.message}) 
+           return res.status(500).json({msg: 'Can not update this product.'}) 
         }
     }
 }

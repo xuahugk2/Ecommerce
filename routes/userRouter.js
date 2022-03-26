@@ -2,6 +2,7 @@ import userController from "../controller/userController.js";
 import express from "express";
 const userRouter = express.Router()
 import auth from "../middleware/auth.js"
+import authAdmin from "../middleware/authAdmin.js"
 
 userRouter.post('/register', userController.register)
 
@@ -16,6 +17,8 @@ userRouter.get('/infor', auth, userController.getUser)
 userRouter.patch('/addcart', auth, userController.addCart)
 
 userRouter.get('/history', auth, userController.history)
+
+userRouter.get('/contacts', auth, authAdmin, userController.getContact)
 
 userRouter.post('/contact', userController.contact)
 
