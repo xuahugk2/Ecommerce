@@ -1,30 +1,11 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import {GlobalSate} from '../../../GlobalSate'
-import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 export default function ListContact() {
 	const state = useContext(GlobalSate)
 
-	const [contacts, setContacts] = state.userAPI.contacts
-
-	const [token] = state.token
-
-	const [isAdmin] = state.userAPI.isAdmin
-
-	useEffect(() => {
-		if(token) {
-			const getContact = async () => {
-				if(isAdmin) {
-					const res = await axios.get('/user/contacts', {
-						headers: {Authorization: token}
-					})
-					setContacts(res.data)
-				}
-			}
-
-			getContact()
-		}
-	}, [token, isAdmin, setContacts])
+	const [contacts] = state.userAPI.contacts
 
 	document.title = 'Contacts'
 	
@@ -35,24 +16,22 @@ export default function ListContact() {
 			<table>
 				<thead>
 					<tr>
-						<th></th>
 						<th>Full Name</th>
 						<th>Email</th>
 						<th>Phone Number</th>
-						<th>Description</th>
 						<th>Create At</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					{
 						contacts.map(contact => (
 							<tr>
-								<td>{contact._id}</td>
 								<td>{contact.name}</td>
 								<td>{contact.email}</td>
 								<td>{contact.tel}</td>
-								<td>{contact.description}</td>
 								<td>{new Date(contact.createdAt).toLocaleDateString()}</td>
+								<td><Link id='btn_view' to={`/contacts/${contact._id}`}><i class="fa-solid fa-eye"></i></Link></td>
 							</tr>
 						))
 					}

@@ -29,9 +29,20 @@ export default function UserAPI(token) {
 				}
 			}
 
+			const getContact = async () => {
+				if(isAdmin) {
+					const res = await axios.get('/user/contacts', {
+						headers: {Authorization: token}
+					})
+					setContacts(res.data)
+				}
+			}
+
 			getUser()
+
+			getContact()
 		}
-	}, [token])
+	}, [token, isAdmin])
 
 	const addCart = async (product) => {
 		if(!isLogged) return alert("Please login to continue buying.")

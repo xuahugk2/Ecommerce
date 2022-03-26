@@ -28,7 +28,7 @@ export default function BtnRender({product, deleteProduct}) {
 						</Link>
 						<Link id='btn_view' to={`/detail/${product._id}`}>
 								Detail
-						</Link>					
+						</Link>
 					</React.Fragment>
 			}
 		</div>

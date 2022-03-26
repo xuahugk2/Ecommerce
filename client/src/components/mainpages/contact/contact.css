@@ -67,3 +67,12 @@
 .contact-page table tbody tr td {    
     text-transform: none;
 }
+
+.contact-page i {
+    cursor: pointer;
+}
+
+.contact-page a {
+    text-decoration: none;
+    background-color: white !important;
+}
