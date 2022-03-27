@@ -1,11 +1,29 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {GlobalSate} from '../../../GlobalSate'
-import {Link} from 'react-router-dom'
+import Dialog from "@material-ui/core/Dialog";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import Button from "@material-ui/core/Button";
 
 export default function ListContact() {
 	const state = useContext(GlobalSate)
 
 	const [contacts] = state.userAPI.contacts
+
+	const [isOpen, setIsOpen] = useState(false)
+
+	const [contact, setContact] = useState({})
+
+	const openBox = (cont) => {
+		setContact(cont)
+		setIsOpen(true)
+	}
+	
+	const closeBox = () => {
+		setIsOpen(false)
+	}
 
 	document.title = 'Contacts'
 	
@@ -25,18 +43,32 @@ export default function ListContact() {
 				</thead>
 				<tbody>
 					{
-						contacts.map(contact => (
+						contacts.map(cont => (
 							<tr>
-								<td>{contact.name}</td>
-								<td>{contact.email}</td>
-								<td>{contact.tel}</td>
-								<td>{new Date(contact.createdAt).toLocaleDateString()}</td>
-								<td><Link id='btn_view' to={`/contacts/${contact._id}`}><i class="fa-solid fa-eye"></i></Link></td>
+								<td>{cont.name}</td>
+								<td>{cont.email}</td>
+								<td>{cont.tel}</td>
+								<td>{new Date(cont.createdAt).toLocaleDateString()}</td>
+								<td><i onClick={() => openBox(cont)} class="fa-solid fa-eye"></i></td>
 							</tr>
 						))
 					}
 				</tbody>
 			</table>
+			
+			<Dialog open={isOpen} onClose={openBox}>
+				<DialogTitle>{contact._id}</DialogTitle>
+				<DialogContent>
+					<DialogContentText>
+						{contact.description}
+					</DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={closeBox} color="primary" autoFocus>
+						Close
+					</Button>
+				</DialogActions>
+			</Dialog>
 		</div>
 	)
 }

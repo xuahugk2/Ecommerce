@@ -13,7 +13,6 @@ import Categories from './categories/Categories'
 import CreateProduct from './createProduct/CreateProduct'
 import Contact from './contact/Contact'
 import ListContact from './contact/ListContact'
-import ContactDetail from './contact/ContactDetail'
 
 export default function Pages() {
     const state = useContext(GlobalSate)
@@ -42,7 +41,6 @@ export default function Pages() {
             <Route path='/contact' element={<Contact/>} />
 
             <Route path='/contacts' element={isAdmin ? <ListContact/> : <NotFound/>} />
-            <Route path='/contacts/:id' element={isAdmin ? <ContactDetail/> : <NotFound/>} />
 
             <Route path='*' element={<NotFound/>} />
         </Routes>
