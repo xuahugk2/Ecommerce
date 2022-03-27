@@ -94,3 +94,9 @@
     letter-spacing: 2px;
     font-weight: 700;
 }
+
+.create-product form select {
+    margin: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}

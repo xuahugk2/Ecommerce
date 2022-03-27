@@ -25,6 +25,7 @@ export default function OrderDetails() {
 
 	return (
 		<div className='history-page'>
+			<h2>Customer Information</h2>
 			<table> 
 				<thead>
 					<tr>
@@ -44,6 +45,7 @@ export default function OrderDetails() {
 				</tbody>
 			</table>
 
+			<h2>Order Detail</h2>
 			<table style={{margin: "30px 0px"}}> 
 				<thead>
 					<tr>

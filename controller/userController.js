@@ -86,7 +86,9 @@ const userController = {
 	logout: async (req, res) => {
 		try {
 			res.clearCookie('refreshToken', {path: '/user/refresh_token'})
-			return res.json({msg: "Logged out."})
+
+			res.json({msg: "Logged out."})
+
 		} catch (error) {
 			return res.status(500).json({msg: 'Error when logging out.'})
 		}
@@ -101,7 +103,7 @@ const userController = {
 
 			jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
 				if(err) {
-					return res.status(400).json({msg: "Please login or register"}) 
+					return res.status(400).json({msg: "Please login or register."}) 
 				}
 				const accessToken = createAccessToken({id: user.id})
 				res.json({user, accessToken})
@@ -109,7 +111,7 @@ const userController = {
 
 			res.json({rf_token})
 		} catch (error) {
-			return res.status(500).json({msg: 'Error when refresh token'})
+			return res.status(500).json({msg: 'Error when refresh token.'})
 		}
 	},
 	getUser: async (req, res) => {

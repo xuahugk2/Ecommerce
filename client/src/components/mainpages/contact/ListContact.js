@@ -49,7 +49,7 @@ export default function ListContact() {
 								<td>{cont.email}</td>
 								<td>{cont.tel}</td>
 								<td>{new Date(cont.createdAt).toLocaleDateString()}</td>
-								<td><i onClick={() => openBox(cont)} class="fa-solid fa-eye"></i></td>
+								<td><i onClick={() => openBox(cont)} className="fa-solid fa-eye"></i></td>
 							</tr>
 						))
 					}

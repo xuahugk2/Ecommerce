@@ -4,7 +4,7 @@ import {GlobalSate} from '../../../GlobalSate'
 import Loading from '../utils/loading/Loading'
 import {useNavigate, useParams} from 'react-router-dom'
 
-const initialState = {
+const initialProduct = {
 	product_id: 'pro',
 	title: 'product ',
 	price: 0,
@@ -17,7 +17,7 @@ const initialState = {
 export default function CreateProduct() {
 	const state = useContext(GlobalSate)
 
-	const [product, setProduct] = useState(initialState)
+	const [product, setProduct] = useState(initialProduct)
 
 	const [products] = state.productsAPI.products
 
@@ -52,7 +52,7 @@ export default function CreateProduct() {
 		} else {
 			document.title = 'Create Product'
 			setOnEdit(false)
-			setProduct(initialState)
+			setProduct(initialProduct)
 			setImages(false)
 		}
 	}, [param.id, products])

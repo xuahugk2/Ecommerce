@@ -54,7 +54,7 @@ export default function OrderHistory() {
 							<tr key={item._id}>
 								<td>{item.paymentID}</td>
 								<td>{new Date(item.createdAt).toLocaleDateString()}</td>
-								<td><Link to={`/history/${item._id}`}>View</Link></td>
+								<td><Link to={`/history/${item._id}`}><i className="fa-solid fa-eye"></i></Link></td>
 							</tr>
 						))
 					}
