@@ -6,7 +6,7 @@
 	"main": "server.js",
 	"type": "module",
 	"scripts": {
-		"build": "react-scripts start && npm run dev",
+		"build": "react-scripts build",
 		"start": "node server.js",
 		"server": "nodemon server.js",
 		"client": "cd client && npm run start",
