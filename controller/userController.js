@@ -87,11 +87,15 @@ const userController = {
 		try {
 			res.clearCookie('refreshToken', {path: '/user/refresh_token'})
 
+			res.clearCookie('refreshToken')
+
 			res.json({msg: "Logged out."})
 
 		} catch (error) {
 			return res.status(500).json({msg: 'Error when logging out.'})
 		}
+
+		res.end()
 	},
 	refreshToken: (req, res) => {
 		try {

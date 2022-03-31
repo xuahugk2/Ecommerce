@@ -37,6 +37,10 @@ button {
 	cursor: pointer;
 }
 
+/*----------------------- Tailwind CSS -----------------------*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /*----------------------- Header -----------------------*/
 @import url('./components/headers/header.css');
@@ -46,9 +50,6 @@ button {
 
 /*----------------------- Detail Product -----------------------*/
 @import url('./components/mainpages/detailProduct/detailProduct.css');
-
-/*----------------------- Login / Register -----------------------*/
-@import url('./components/mainpages/auth/auth.css');
 
 /*----------------------- Cart -----------------------*/
 @import url('./components/mainpages/cart/cart.css');
