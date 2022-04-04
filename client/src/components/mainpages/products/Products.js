@@ -73,6 +73,8 @@ export default function Products() {
 	}
 
 	document.title = 'DauCatMoi'
+
+	console.log(products);
 	
 	return (
 		<React.Fragment>

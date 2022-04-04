@@ -66,6 +66,11 @@
     margin-left: 5px;
 }
 
+#btn-sold_out {
+    background-color: crimson;
+    margin-right: 5px;
+}
+
 .product_card input {
     position: absolute;
     width: 20px;

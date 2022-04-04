@@ -3,17 +3,22 @@ import {GlobalSate} from '../../../GlobalSate'
 import axios from 'axios'
 import PaypalButton from './PaypalButton'
 import Loading from '../utils/loading/Loading'
+import {useNavigate} from 'react-router-dom'
 
 export default function Cart() {
 	const state = useContext(GlobalSate)
 
 	const [cart, setCart] = state.userAPI.cart
 
+	const [callback, setCallback] = state.productsAPI.callback
+
 	const [token] = state.token
 
 	const [total, setTotal] = useState(0)
 
 	const [loading, setLoading] = useState(false)
+
+	const history = useNavigate()
 
 	useEffect(() => {
 		setLoading(true)
@@ -36,6 +41,8 @@ export default function Cart() {
 	}
 
 	const increment = (id) => {
+		
+
 		cart.forEach(item => {
 			if(item._id === id) {
 				item.quantity += 1
@@ -80,9 +87,18 @@ export default function Cart() {
 			headers: {Authorization: token}
 		})
 
+		cart.forEach(async product => {
+			await axios.post(`/api/quantity/${product._id}`, {sold: product.quantity}, {
+				headers: {Authorization: token}
+			})
+		})		
+		
 		setCart([])
 		addToCart([])
 		alert('You have successfully placed an order.')
+
+		setCallback(!callback)
+		history.push('/')
 	}
 
 	if(loading) {

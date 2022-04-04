@@ -23,9 +23,9 @@ export default function BtnRender({product, deleteProduct}) {
 					</React.Fragment>
 						:
 					<React.Fragment>
-						<Link id='btn_buy' to='#!' onClick={() => addCart(product)}>
-								Buy
-						</Link>
+						{
+							(product.quantity > 0) ? <Link id='btn_buy' to='#!' onClick={() => addCart(product)}>Buy</Link> : <Link id='btn-sold_out' to='#!'>Sold out</Link>
+						}
 						<Link id='btn_view' to={`/detail/${product._id}`}>
 								Detail
 						</Link>

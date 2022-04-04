@@ -9,8 +9,9 @@ const initialProduct = {
 	title: 'product ',
 	price: 0,
 	description: 'This is an example description',
-	content: 'This is an example content',
+	content: 'This is an example of the content',
 	category: '',
+	quantity: 0,
 	_id: ''
 }
 
@@ -192,6 +193,13 @@ export default function CreateProduct() {
 					<label htmlFor="price">Price</label>
 					<input type="number" name='price' id='price' required 
 						value={product.price} 
+						onChange={handleChangeInput} />
+				</div>
+
+				<div className="row">
+					<label htmlFor="quantity">Quantity</label>
+					<input type="number" name='quantity' id='quantity' required min={0}
+						value={product.quantity} 
 						onChange={handleChangeInput} />
 				</div>
 				

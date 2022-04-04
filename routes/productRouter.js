@@ -10,5 +10,7 @@ router.route('/products/:id')
     .delete(productController.deleteProduct)
     .put(productController.updateProduct)
 
+router.post('/quantity/:id', productController.updateQuantity)
+
 
 export default router

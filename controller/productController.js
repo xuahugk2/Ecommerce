@@ -100,7 +100,7 @@ const productController = {
            return res.status(500).json({msg: 'Can not delete this product.'}) 
         }
     },
-    updateProduct: async(req, res) => {
+    updateProduct: async (req, res) => {
         try {
             const {title, price, description, content, images, category} = req.body
 
@@ -114,6 +114,25 @@ const productController = {
             res.json({msg: "Updated a product."})
         } catch (error) {
            return res.status(500).json({msg: 'Can not update this product.'}) 
+        }
+    }, 
+    updateQuantity: async (req, res) => {
+        try {
+            const {sold} = req.body
+
+            const product = await productModel.findOne({_id: req.params.id})
+
+            const amount = product.quantity
+
+            console.log({amount: amount});
+
+            await productModel.findByIdAndUpdate({_id: req.params.id}, {
+                quantity: amount - sold
+            })
+
+            res.json({msg: "Updated quantity."})
+        } catch (error) {
+            return res.status(500).json({msg: 'Can not update this product.'}) 
         }
     }
 }
