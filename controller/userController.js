@@ -87,8 +87,6 @@ const userController = {
 		try {
 			res.clearCookie('refreshToken', {path: '/user/refresh_token'})
 
-			res.clearCookie('refreshToken')
-
 			res.json({msg: "Logged out."})
 
 		} catch (error) {
@@ -110,7 +108,7 @@ const userController = {
 					return res.status(400).json({msg: "Please login or register."}) 
 				}
 				const accessToken = createAccessToken({id: user.id})
-				res.json({user, accessToken})
+				return res.json({user, accessToken})
 			})
 
 			res.json({rf_token})
@@ -120,7 +118,7 @@ const userController = {
 	},
 	getUser: async (req, res) => {
 		try {
-			const user = await userModel.findById(req.user.id).select('-password')
+			const user = await userModel.findById(req.user.id)//.select('-password')
 			if(!user) {
 				return res.status(400).json({msg: "User does not exists."})
 			}

@@ -4,10 +4,10 @@ import axios from 'axios'
 export default function Contact() {
 
 	const [contact, setContact] = useState({
-		name: 'Do Trong Nhan',
-		email: 'nhan@gmail.com',
-		tel: '0123456789',
-		description: 'Contact demo'
+		name: '',
+		email: '',
+		tel: '',
+		description: ''
 	}) 
 
 	const onChangeInput = (e) => {

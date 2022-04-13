@@ -19,9 +19,11 @@ export default function Header() {
 
 		localStorage.removeItem('firstLogin')
 
-		setCart([])
-		setIsAdmin(false)
-		setIsLogged(false)
+		window.location.href = '/'
+
+		// setCart([])
+		// setIsLogged(false)
+		// setIsAdmin(false)
 	}
 
 	const adminRouter = () => {

@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../utils/loading/Loading'
-import { LockClosedIcon } from '@heroicons/react/solid'
 
 export default function Login() {
 	const [user, setUser] = useState({

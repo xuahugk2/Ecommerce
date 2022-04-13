@@ -1,4 +1,3 @@
-import { LogTimings } from 'concurrently'
 import productModel from '../models/productModel.js'
 
 class APIfeatures {
@@ -12,24 +11,25 @@ class APIfeatures {
         
         const excludedFields = ['page', 'sort', 'limit']
         excludedFields.forEach(el => delete(queryObj[el]))
-
+        
         let queryStr = JSON.stringify(queryObj)
         queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
-
+        
         //gte = greater than or equal
         //gt = greater than
         //lte = lesser than or equal
         //lt = lesser than
-        this.query.find(JSON.parse(queryStr))
+        this.query = this.query.find(JSON.parse(queryStr))
 
         return this
     }
+
     sorting(){
         if(this.queryString.sort) {
             const sortBy = this.queryString.sort.split(',').join(' ')
             this.query = this.query.sort(sortBy)
         } else {
-            this.query = this.query.sort('-createAt')
+            this.query = this.query.sort('-createdAt')
         }
 
         return this
@@ -64,7 +64,7 @@ const productController = {
     },
     createProduct: async(req, res) => {
         try {
-            const {product_id, title, price, description, content, images, category} = req.body
+            const {product_id, title, price, quantity, description, content, images, category} = req.body
 
             if(!images) 
                 return res.status(400).json({msg: 'No images uploaded.'})
@@ -78,6 +78,7 @@ const productController = {
                 product_id,
                 title,
                 price,
+                quantity,
                 description,
                 content,
                 images,
@@ -102,13 +103,13 @@ const productController = {
     },
     updateProduct: async (req, res) => {
         try {
-            const {title, price, description, content, images, category} = req.body
+            const {title, price, quantity, description, content, images, category} = req.body
 
             if(!images)
                 return res.status(400).json({msg: 'No images uploaded.'})
 
             await productModel.findByIdAndUpdate({_id: req.params.id}, {
-                title: title.toLowerCase(), price, description, content, images, category
+                title: title.toLowerCase(), price, quantity, description, content, images, category
             })
 
             res.json({msg: "Updated a product."})

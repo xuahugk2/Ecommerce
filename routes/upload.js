@@ -13,6 +13,7 @@ router.post('/upload', auth, authAdmin, (req, res) => {
 			return res.status(400).json({msg: 'No files were uploaded.'})
 
 		const file = req.files.file
+		console.log(req);
 
 		if(file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg'){
 			removeTemp(file.tempFilePath)
@@ -22,14 +23,12 @@ router.post('/upload', auth, authAdmin, (req, res) => {
 		if(file.size > 1024*1024){
 			removeTemp(file.tempFilePath)
 			return res.status(400).json({msg: 'Size too large.'})
-		}
+		}		
 		
 		cloudinary.upload(file.tempFilePath, {folder: "ecommerce"},
 			async (err, result) => {
 				if (err)
 					console.log({Error: err});
-				
-				
 
 				console.log("File is being uploaded.");
 
@@ -54,6 +53,8 @@ router.post('/destroy', auth, authAdmin, (req, res) => {
 
 		cloudinary.destroy(public_id, async(err, result) => {
 			if(err) throw err
+
+			console.log(result)
 
 			res.json({mgs: 'Deleted Image'})
 		})
