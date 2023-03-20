@@ -1,7 +1,6 @@
 import dotenv from "dotenv"
 dotenv.config()
 import express  from "express"
-import mongoose from "mongoose"
 import { MongoClient, ServerApiVersion } from "mongodb"
 import cors from "cors"
 import fileUpload from "express-fileupload"
@@ -17,36 +16,42 @@ app.use(fileUpload({
 }))
 
 //Routers
-import userRouter from './routes/userRouter.js'
-app.use('/user', userRouter)
+// import userRouter from './routes/userRouter.js'
+// app.use('/user', userRouter)
 
-import categoryRouter from "./routes/categoryRouter.js"
-app.use('/api', categoryRouter)
+// import categoryRouter from "./routes/categoryRouter.js"
+// app.use('/api', categoryRouter)
 
-import upload from './routes/upload.js'
-app.use('/api', upload)
+// import upload from './routes/upload.js'
+// app.use('/api', upload)
 
-import productRouter from './routes/productRouter.js'
-app.use('/api', productRouter)
+// import productRouter from './routes/productRouter.js'
+// app.use('/api', productRouter)
 
-import paymentRouter from './routes/paymentRouter.js'
-app.use('/api', paymentRouter)
+// import paymentRouter from './routes/paymentRouter.js'
+// app.use('/api', paymentRouter)
 
 //Connect to MongoDB
-const URI = process.env.MONGO_URI
-mongoose.connect(URI, {
+const client = new MongoClient(process.env.MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-}, err => {
-    if (err) throw err
-    console.log('Connected to MongoDB');
-})
+    useUnifiedTopology: true,
+    serverApi: ServerApiVersion.v1
+});
 
-const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
+client.connect(async err => {
+    const dbName = process.env.DB_NAME || "Ecommerce"
+    const collection = client.db(dbName).collection("user")
+
+    await collection.insertOne({
+        name: "Administrator",
+        email: "admin@gmail.com",
+        password: "admin@123",
+        role: 1,
+        cart: []
+    })
+    // perform actions on the collection object
+    client.close();
+    console.log("Insert data success");
 });
 
 
