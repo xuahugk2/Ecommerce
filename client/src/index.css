@@ -37,11 +37,6 @@ button {
 	cursor: pointer;
 }
 
-/*----------------------- Tailwind CSS -----------------------*/
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /*----------------------- Header -----------------------*/
 @import url('./components/headers/header.css');
 

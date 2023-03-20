@@ -1,11 +1,5 @@
 import React, {useContext, useState} from 'react'
 import {GlobalSate} from '../../../GlobalSate'
-import Dialog from "@material-ui/core/Dialog";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import Button from "@material-ui/core/Button";
 
 export default function ListContact() {
 	const state = useContext(GlobalSate)
@@ -20,13 +14,13 @@ export default function ListContact() {
 		setContact(cont)
 		setIsOpen(true)
 	}
-	
+
 	const closeBox = () => {
 		setIsOpen(false)
 	}
 
 	document.title = 'Contacts'
-	
+
 	return (
 		<div className="contact-page">
 			<h2>Contacts List</h2>
@@ -55,20 +49,6 @@ export default function ListContact() {
 					}
 				</tbody>
 			</table>
-			
-			<Dialog open={isOpen} onClose={openBox}>
-				<DialogTitle>{contact._id}</DialogTitle>
-				<DialogContent>
-					<DialogContentText>
-						{contact.description}
-					</DialogContentText>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={closeBox} color="primary" autoFocus>
-						Close
-					</Button>
-				</DialogActions>
-			</Dialog>
 		</div>
 	)
 }

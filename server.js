@@ -2,6 +2,7 @@ import dotenv from "dotenv"
 dotenv.config()
 import express  from "express"
 import mongoose from "mongoose"
+import { MongoClient, ServerApiVersion } from "mongodb"
 import cors from "cors"
 import fileUpload from "express-fileupload"
 import cookieParser from "cookie-parser"
@@ -40,6 +41,14 @@ mongoose.connect(URI, {
     if (err) throw err
     console.log('Connected to MongoDB');
 })
+
+const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
 
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
