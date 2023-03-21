@@ -32,27 +32,26 @@ app.use(fileUpload({
 // app.use('/api', paymentRouter)
 
 //Connect to MongoDB
-const client = new MongoClient(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverApi: ServerApiVersion.v1
-});
+// const client = new MongoClient(process.env.MONGO_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     serverApi: ServerApiVersion.v1
+// });
 
-client.connect(async err => {
-    const dbName = process.env.DB_NAME || "Ecommerce"
-    const collection = client.db(dbName).collection("user")
+// client.connect(async err => {
+//     const dbName = process.env.DB_NAME || "Ecommerce"
+//     const collection = client.db(dbName).collection("user")
 
-    await collection.insertOne({
-        name: "Administrator",
-        email: "admin@gmail.com",
-        password: "admin@123",
-        role: 1,
-        cart: []
-    })
-    // perform actions on the collection object
-    client.close();
-    console.log("Insert data success");
-});
+//     await collection.insertOne({
+//         name: "Administrator",
+//         email: "admin@gmail.com",
+//         password: "admin@123",
+//         role: 1,
+//         cart: []
+//     })
+//     // perform actions on the collection object
+//     client.close();
+// });
 
 
 if(process.env.NODE_ENV === 'production') {

@@ -1,48 +1,31 @@
 /*---------------------- Loading ----------------------*/
-.loading-page {
-	background-color: #fff;
-	overflow: hidden;
+.lds-circle {
+	display: inline-block;
+	transform: translateZ(1px);
+	margin: calc(100vh - 486px) calc(calc(100% - 120px) / 2);
 }
 
-.loading {
-	width: 300px;
-	height: 300px;
-	margin: auto;
-}
-
-.loading div {
-	width: calc(100% - 15px);
-	height: calc(100% - 15px);
-	border: 2px solid #fff;
-	border-top: 2px solid crimson;
+.lds-circle > div {
+	display: inline-block;
+	width: 64px;
+	height: 64px;
+	margin: 8px;
 	border-radius: 50%;
-	animation: rotate 10s linear infinite alternate-reverse;
+	background: #000;
+	animation: lds-circle 5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
-
-@keyframes rotate {
-	50%{
-		transform: rotate(80deg);
+@keyframes lds-circle {
+	0%, 100% {
+		animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
 	}
-	100%{
-		transform: rotate(360deg);
+	0% {
+		transform: rotateY(0deg);
 	}
-}
-
-/*---------------------- Loader ----------------------*/
-.loader {
-	border: 16px solid #f3f3f3;
-	border-top: 16px solid blue;
-	border-right: 16px solid green;
-	border-bottom: 16px solid red;
-	border-left: 16px solid pink;
-	border-radius: 50%;
-	width: 120px;
-	height: 120px;
-	margin: auto calc(calc(100% - 120px) / 2);
-	animation: spin 2s linear infinite;
-}
-  
-@keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
+	50% {
+		transform: rotateY(1800deg);
+		animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+	}
+	100% {
+		transform: rotateY(3600deg);
+	}
 }
