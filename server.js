@@ -32,18 +32,19 @@ app.use(fileUpload({
 // import paymentRouter from './routes/paymentRouter.js'
 // app.use('/api', paymentRouter)
 
-//Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+//Connect to MongoDB by mongoose
+// mongoose.connect(process.env.MONGO_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// });
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('Connected to MongoDB');
-});
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function() {
+//   console.log('Connected to MongoDB');
+// });
 
+//Connect to MongoDB by mongodb
 // const client = new MongoClient(process.env.MONGO_URI, {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
@@ -52,15 +53,12 @@ db.once('open', function() {
 
 // client.connect(async err => {
 //     const dbName = process.env.DB_NAME || "Ecommerce"
-//     const collection = client.db(dbName).collection("user")
+//     const collection = client.db(dbName).collection("Users")
 
-//     await collection.insertOne({
-//         name: "Administrator",
-//         email: "admin@gmail.com",
-//         password: "admin@123",
-//         role: 1,
-//         cart: []
+//     const user = await collection.findOne({
+//         email: "admin@gmail.com"
 //     })
+//     console.log("user: ", user);
 //     // perform actions on the collection object
 //     client.close();
 // });
