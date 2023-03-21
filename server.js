@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
 dotenv.config()
 import express  from "express"
+import mongoose from "mongoose"
 import { MongoClient, ServerApiVersion } from "mongodb"
 import cors from "cors"
 import fileUpload from "express-fileupload"
@@ -32,6 +33,17 @@ app.use(fileUpload({
 // app.use('/api', paymentRouter)
 
 //Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Connected to MongoDB');
+});
+
 // const client = new MongoClient(process.env.MONGO_URI, {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,

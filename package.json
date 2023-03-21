@@ -29,6 +29,7 @@
 		"express-fileupload": "*",
 		"jsonwebtoken": "*",
 		"mongodb": "*",
+		"mongoose": "*",
 		"react-scripts": "*"
 	},
 	"devDependencies": {

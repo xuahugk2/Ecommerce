@@ -8,13 +8,13 @@ class APIfeatures {
 
     filtering(){
         const queryObj = {...this.queryString}
-        
+
         const excludedFields = ['page', 'sort', 'limit']
         excludedFields.forEach(el => delete(queryObj[el]))
-        
+
         let queryStr = JSON.stringify(queryObj)
         queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
-        
+
         //gte = greater than or equal
         //gt = greater than
         //lte = lesser than or equal
@@ -34,6 +34,7 @@ class APIfeatures {
 
         return this
     }
+
     paginating(){
         const page = this.queryString.page * 1 || 1
         const limit = this.queryString.limit * 1 || 6

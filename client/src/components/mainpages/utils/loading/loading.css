@@ -2,7 +2,7 @@
 .lds-circle {
 	display: inline-block;
 	transform: translateZ(1px);
-	margin: calc(100vh - 486px) calc(calc(100% - 120px) / 2);
+	margin: calc(calc(100vh - 500px) / 2) calc(calc(100% - 64px) / 2);
 }
 
 .lds-circle > div {

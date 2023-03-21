@@ -48,31 +48,31 @@ export default function Login() {
 						<div className="h-2 bg-indigo-400 rounded-t-md"></div>
 						<form onSubmit={loginSubmit} className="py-6 px-8">
 							<label htmlFor='email-address' className="block font-semibold">Email</label>
-							<input 
+							<input
 								id="email-address"
 								name="email"
-								type="email" 
+								type="email"
 								autoComplete="email"
 								required
-								placeholder="Email" 
+								placeholder="Email"
 								className=" border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-indigo-600 rounded-md"
 								value={user.email}
 								onChange={onChangeInput}
 							/>
-							
+
 							<label htmlFor='password' className="block mt-3 font-semibold">Password</label>
-							<input 
+							<input
 								id='password'
 								name='password'
-								type="password" 
+								type="password"
 								autoComplete="current-password"
 								required
-								placeholder="Password" 
+								placeholder="Password"
 								className=" border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-indigo-600 rounded-md"
-								value={user.password} 
+								value={user.password}
 								onChange={onChangeInput}
 							/>
-							
+
 							<div className="flex justify-between items-baseline">
 								<button type='submit' className="mt-4 bg-indigo-500 text-white py-1 px-6 rounded-lg">Login</button>
 								<Link to="/register" className="text-sm hover:underline">Create new account</Link>
