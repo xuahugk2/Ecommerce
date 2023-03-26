@@ -3,7 +3,7 @@ import {GlobalSate} from '../../../GlobalSate'
 import axios from 'axios'
 import PaypalButton from './PaypalButton'
 import Loading from '../utils/loading/Loading'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 
 export default function Cart() {
 	const state = useContext(GlobalSate)
@@ -41,8 +41,6 @@ export default function Cart() {
 	}
 
 	const increment = (id) => {
-		
-
 		cart.forEach(item => {
 			if(item._id === id) {
 				item.quantity += 1
@@ -91,8 +89,8 @@ export default function Cart() {
 			await axios.post(`/api/quantity/${product._id}`, {sold: product.quantity}, {
 				headers: {Authorization: token}
 			})
-		})		
-		
+		})
+
 		setCart([])
 		addToCart([])
 		alert('You have successfully placed an order.')
@@ -106,45 +104,21 @@ export default function Cart() {
 	}
 
 	document.title = 'Cart'
-	
+
+	if (!token) {
+		return (
+			<div>
+				<p className='message'>Please Login to see your cart!</p>
+				<Link className='transition-button text-white bg-indigo-500 text-white px-6' to='/login'>Back to Login</Link>
+			</div>
+		)
+	}
+
 	if(cart.length === 0) {
-		return <h2 style={{textAlign: "center", fontSize: "5rem"}}>Cart Empty</h2>
+		return <h2 className='message'>Cart Empty</h2>
 	}
 
 	return (
-		/*<div>
-			{
-				cart.map(product => (
-					<div className='detail cart' key={product._id}>		
-						<img src={product.images.url} alt=''/>
-						
-						<div className='box-detail'>
-							<h2>{product.title}</h2>
-							<h3>{`$${product.price * product.quantity}`}</h3>
-							<p>{product.description}</p>
-							<p>Sold: {product.sold}</p>
-							<div className="amount">
-								<button onClick={() => decrement(product._id)}> - </button>
-								<span>{product.quantity}</span>
-								<button onClick={() => increment(product._id)}> + </button>
-							</div>
-							<div className="delete" onClick={() => removeProduct(product._id)}>
-								X
-							</div>
-						</div>
-					</div>
-				))
-			}
-
-			<div className="total">
-				<h3>{`Total: $${total}`}</h3>
-				<PaypalButton 
-					total={total} 
-					tranSuccess={tranSuccess}
-					/>
-			</div>
-		</div>*/
-
 		<div className="container p-8 mx-auto mt-12">
 			<div className="w-full overflow-x-auto">
 				<div className="my-2">

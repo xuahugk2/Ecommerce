@@ -12,7 +12,7 @@ export default function Products() {
 	const [products, setProducts] = state.productsAPI.products
 
 	const [isAdmin] = state.userAPI.isAdmin
-	
+
 	const [token] = state.token
 
 	const [callback, setCallback] = state.productsAPI.callback
@@ -73,13 +73,13 @@ export default function Products() {
 	}
 
 	document.title = 'DauCatMoi'
-	
+
 	return (
 		<React.Fragment>
 			<Filter/>
 
 			{
-				isAdmin && 
+				isAdmin &&
 					<div className='delete-all'>
 						<span htmlFor='check'>Select All</span>
 						<input name='check' type="checkbox" checked={isChecked} onChange={checkAll} />
@@ -90,7 +90,7 @@ export default function Products() {
 			<div className='products'>
 				{
 					products.map(product => {
-						return <ProductItem 
+						return <ProductItem
 									key={product._id}
 									product={product}
 									isAdmin={isAdmin}

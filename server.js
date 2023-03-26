@@ -33,16 +33,16 @@ app.use(fileUpload({
 // app.use('/api', paymentRouter)
 
 //Connect to MongoDB by mongoose
-// mongoose.connect(process.env.MONGO_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// });
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function() {
-//   console.log('Connected to MongoDB');
-// });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Connected to MongoDB');
+});
 
 //Connect to MongoDB by mongodb
 // const client = new MongoClient(process.env.MONGO_URI, {

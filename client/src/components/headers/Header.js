@@ -71,21 +71,21 @@ export default function Header() {
 				{
 					isLogged ? loggedRouter() : <li><Link to='/login'>Login</Link></li>
 				}
-				
+
 				<li onClick={() => setMenu(!menu)}>
 					<img src={Close} alt='' width='30' className='menu'/>
 				</li>
 			</ul>
 
 			{
-				isAdmin ? '' : 
+				isAdmin ? '' :
 					<div className='cart-icon'>
 						<span>{cart.length}</span>
 						<Link to='/cart'>
 							<img src={Cart} alt='' width='30'/>
 						</Link>
 					</div>
-			}			
+			}
 		</header>
 	)
 }
