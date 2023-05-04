@@ -28,7 +28,6 @@
 		"express": "*",
 		"express-fileupload": "*",
 		"jsonwebtoken": "*",
-		"mongodb": "*",
 		"mongoose": "*",
 		"react-scripts": "*"
 	},

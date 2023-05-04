@@ -103,7 +103,9 @@ export default function Products() {
 
 			<LoadMore/>
 
-			{products.length === 0 && <Loading/>}
+			{products && products.length === 0 ? <span>There is no product yet!</span> : ''}
+
+			{(products === undefined || products == null) && <Loading/>}
 		</React.Fragment>
 	)
 }

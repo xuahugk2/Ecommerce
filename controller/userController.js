@@ -57,6 +57,8 @@ const userController = {
 		try {
 			const {email, password} = req.body
 
+			console.log({email, password});
+
 			const user = await userModel.findOne({email})
 			if(!user) {
 				return res.status(400).json({msg: "User does not exists."})
