@@ -1,37 +1,30 @@
 {
-	"name": "ecommerce",
-	"version": "1.0.0",
-	"description": "",
-	"homepage": "https://xuahugk2.github.io/Ecommerce/",
-	"main": "server.js",
-	"type": "module",
-	"scripts": {
-		"start": "node server.js",
-		"server": "nodemon server.js",
-		"client": "cd client && npm run start",
-		"server-install": "npm install",
-		"client-install": "cd client && npm install",
-		"install-all": "concurrently \"npm run server-install\" \"npm run client-install\"",
-		"dev": "concurrently \"npm run server\" \"npm run client\""
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"bcrypt": "*",
-		"cloudinary": "*",
-		"concurrently": "*",
-		"cookie-parser": "*",
-		"cors": "*",
-		"dist": "*",
-		"dotenv": "*",
-		"express": "*",
-		"express-fileupload": "*",
-		"jsonwebtoken": "*",
-		"mongoose": "*",
-		"react-scripts": "*"
-	},
-	"devDependencies": {
-		"nodemon": "*"
-	}
+    "name": "ecommerce",
+    "version": "1.0.0",
+    "description": "",
+    "homepage": "https://xuahugk2.github.io/Ecommerce/",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "*",
+        "cloudinary": "*",
+        "cookie-parser": "*",
+        "cors": "*",
+        "dist": "*",
+        "dotenv": "*",
+        "express": "*",
+        "express-fileupload": "*",
+        "jsonwebtoken": "*",
+        "mongoose": "*",
+        "react-scripts": "*"
+    },
+    "devDependencies": {
+        "nodemon": "*"
+    }
 }

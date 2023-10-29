@@ -1,12 +1,12 @@
 import mongoose from "mongoose"
 
 const contactModel = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
         required: true,
         trim: true
     },
-    email:{
+    email: {
         type: String,
         required: true,
         trim: true

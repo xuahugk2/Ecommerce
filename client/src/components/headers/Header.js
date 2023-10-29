@@ -7,85 +7,85 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 export default function Header() {
-	const state = useContext(GlobalSate)
+    const state = useContext(GlobalSate)
 
-	const [isLogged, setIsLogged] = state.userAPI.isLogged
-	const [isAdmin, setIsAdmin] = state.userAPI.isAdmin
-	const [cart, setCart] = state.userAPI.cart
-	const [menu, setMenu] = useState(false)
+    const [isLogged, setIsLogged] = state.userAPI.isLogged
+    const [isAdmin, setIsAdmin] = state.userAPI.isAdmin
+    const [cart, setCart] = state.userAPI.cart
+    const [menu, setMenu] = useState(false)
 
-	const logoutUser = async () => {
-		await axios.get('/user/logout')
+    const logoutUser = async () => {
+        await axios.get('/user/logout')
 
-		localStorage.removeItem('firstLogin')
+        localStorage.removeItem('firstLogin')
 
-		window.location.href = '/'
+        window.location.href = '/'
 
-		// setCart([])
-		// setIsLogged(false)
-		// setIsAdmin(false)
-	}
+        // setCart([])
+        // setIsLogged(false)
+        // setIsAdmin(false)
+    }
 
-	const adminRouter = () => {
-		return (
-			<React.Fragment>
-				<li><Link to='/create_product'>Create Product</Link></li>
-				<li><Link to='/category'>Categories</Link></li>
-			</React.Fragment>
-		)
-	}
+    const adminRouter = () => {
+        return (
+            <React.Fragment>
+                <li><Link to='/create_product'>Create Product</Link></li>
+                <li><Link to='/category'>Categories</Link></li>
+            </React.Fragment>
+        )
+    }
 
-	const toggleMenu = () => setMenu(!menu)
+    const toggleMenu = () => setMenu(!menu)
 
-	const loggedRouter = () => {
-		return (
-			<React.Fragment>
-				<li><Link to='/history'>History</Link></li>
-				<li><Link to='/' onClick={logoutUser}>Logout</Link></li>
-			</React.Fragment>
-		)
-	}
+    const loggedRouter = () => {
+        return (
+            <React.Fragment>
+                <li><Link to='/history'>History</Link></li>
+                <li><Link to='/' onClick={logoutUser}>Logout</Link></li>
+            </React.Fragment>
+        )
+    }
 
-	const styleMenu = {
-		left: menu ? 0 : '-100%'
-	}
+    const styleMenu = {
+        left: menu ? 0 : '-100%'
+    }
 
-	return (
-		<header>
-			<div className='menu' onClick={() => setMenu(!menu)}>
-				<img src={Menu} alt='' width='30' />
-			</div>
+    return (
+        <header>
+            <div className='menu' onClick={() => setMenu(!menu)}>
+                <img src={Menu} alt='' width='30' />
+            </div>
 
-			<div className='logo'>
-				<h1>
-					<Link to='/'>{isAdmin ? 'Admin' : 'DauCatMoi'}</Link>
-				</h1>
-			</div>
+            <div className='logo'>
+                <h1>
+                    <Link to='/'>{isAdmin ? 'Admin' : 'DauCatMoi'}</Link>
+                </h1>
+            </div>
 
-			<ul style={styleMenu}>
-				<li>{isAdmin ? <Link to='/contacts'>Contacts</Link> : <Link to='/contact'>Contact</Link>}</li>
+            <ul style={styleMenu}>
+                <li>{isAdmin ? <Link to='/contacts'>Contacts</Link> : <Link to='/contact'>Contact</Link>}</li>
 
-				<li><Link to='/'>{isAdmin ? 'Products' : 'Shop'}</Link></li>
+                <li><Link to='/'>{isAdmin ? 'Products' : 'Shop'}</Link></li>
 
-				{isAdmin && adminRouter()}
-				{
-					isLogged ? loggedRouter() : <li><Link to='/login'>Login</Link></li>
-				}
+                {isAdmin && adminRouter()}
+                {
+                    isLogged ? loggedRouter() : <li><Link to='/login'>Login</Link></li>
+                }
 
-				<li onClick={() => setMenu(!menu)}>
-					<img src={Close} alt='' width='30' className='menu'/>
-				</li>
-			</ul>
+                <li onClick={() => setMenu(!menu)}>
+                    <img src={Close} alt='' width='30' className='menu' />
+                </li>
+            </ul>
 
-			{
-				isAdmin ? '' :
-					<div className='cart-icon'>
-						<span>{cart.length}</span>
-						<Link to='/cart'>
-							<img src={Cart} alt='' width='30'/>
-						</Link>
-					</div>
-			}
-		</header>
-	)
+            {
+                isAdmin ? '' :
+                    <div className='cart-icon'>
+                        <span>{cart.length}</span>
+                        <Link to='/cart'>
+                            <img src={Cart} alt='' width='30' />
+                        </Link>
+                    </div>
+            }
+        </header>
+    )
 }

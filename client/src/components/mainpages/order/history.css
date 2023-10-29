@@ -2,7 +2,8 @@
     overflow-x: auto;
 }
 
-.history-page h2, .history-page h4 {
+.history-page h2,
+.history-page h4 {
     text-align: center;
     margin: 20px;
     text-transform: uppercase;
@@ -14,12 +15,16 @@
     width: 100%;
 }
 
-.history-page table, th, tr, td {
+.history-page table,
+th,
+tr,
+td {
     border: 1px solid #ddd;
     border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     text-align: center;
     padding: 10px;
     text-transform: capitalize;

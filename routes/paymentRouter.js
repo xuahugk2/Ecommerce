@@ -7,5 +7,5 @@ import authAdmin from '../middleware/authAdmin.js'
 router.route('/payment')
     .get(auth, authAdmin, paymentController.getPayments)
     .post(auth, paymentController.createPayments)
-    
+
 export default router

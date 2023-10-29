@@ -56,12 +56,14 @@
     padding: 6px;
 }
 
-#btn_buy, #btn_delete {
+#btn_buy,
+#btn_delete {
     background-color: #555;
     margin-right: 5px;
 }
 
-#btn_view, #btn_edit {
+#btn_view,
+#btn_edit {
     background-color: teal;
     margin-left: 5px;
 }

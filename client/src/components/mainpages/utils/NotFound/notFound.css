@@ -1,32 +1,32 @@
 .wrapper {
-	width: 100%;
-	height: calc(100vh - 70px);
-	align-items: center;
-	justify-content: center;
-	text-align: center;
+    width: 100%;
+    height: calc(100vh - 70px);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .wrapper h1 {
-	display: block;
-	padding: 50px 0;
-	font-size: 70px;
-	width: 100%;
+    display: block;
+    padding: 50px 0;
+    font-size: 70px;
+    width: 100%;
 }
 
 .wrapper a {
-	padding: 10px 15px;
-	background-color: orange;
-	border: none;
-	border-radius: 12px;
-	transition: .3s;
-	font-size: 20px;
+    padding: 10px 15px;
+    background-color: orange;
+    border: none;
+    border-radius: 12px;
+    transition: .3s;
+    font-size: 20px;
 }
 
 .wrapper a:hover {
-	opacity: 0.5;
+    opacity: 0.5;
 }
 
 .wrapper a i {
-	margin-right: 10px;
-	font-size: 16px;
+    margin-right: 10px;
+    font-size: 16px;
 }

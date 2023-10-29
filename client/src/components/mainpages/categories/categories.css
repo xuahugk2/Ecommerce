@@ -19,7 +19,8 @@
     margin-bottom: 10px;
 }
 
-.categories input, button {
+.categories input,
+button {
     height: 35px;
     border: none;
     outline: none;

@@ -7,66 +7,66 @@ import fs from 'fs'
 
 //Upload Image only admin can use
 router.post('/upload', auth, authAdmin, (req, res) => {
-	try {
+    try {
 
-		if(!req.files || Object.keys(req.files).length === 0)
-			return res.status(400).json({msg: 'No files were uploaded.'})
+        if (!req.files || Object.keys(req.files).length === 0)
+            return res.status(400).json({ msg: 'No files were uploaded.' })
 
-		const file = req.files.file
-		console.log(req);
+        const file = req.files.file
+        console.log(req);
 
-		if(file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg'){
-			removeTemp(file.tempFilePath)
-			return res.status(400).json({msg: 'File format is incorrect.'})
-		}
+        if (file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg') {
+            removeTemp(file.tempFilePath)
+            return res.status(400).json({ msg: 'File format is incorrect.' })
+        }
 
-		if(file.size > 1024*1024){
-			removeTemp(file.tempFilePath)
-			return res.status(400).json({msg: 'Size too large.'})
-		}		
-		
-		cloudinary.upload(file.tempFilePath, {folder: "ecommerce"},
-			async (err, result) => {
-				if (err)
-					console.log({Error: err});
+        if (file.size > 1024 * 1024) {
+            removeTemp(file.tempFilePath)
+            return res.status(400).json({ msg: 'Size too large.' })
+        }
 
-				console.log("File is being uploaded.");
+        cloudinary.upload(file.tempFilePath, { folder: "ecommerce" },
+            async (err, result) => {
+                if (err)
+                    console.log({ Error: err });
 
-				removeTemp(file.tempFilePath)
+                console.log("File is being uploaded.");
 
-				return res.json({
-					public_id: result.public_id,
-					url: result.secure_url
-				})
-		})
-			
-	} catch (error) {
-		return res.status(500).json({msg: error.message})
-	}
+                removeTemp(file.tempFilePath)
+
+                return res.json({
+                    public_id: result.public_id,
+                    url: result.secure_url
+                })
+            })
+
+    } catch (error) {
+        return res.status(500).json({ msg: error.message })
+    }
 })
 
 //Delete Image only admin can use
 router.post('/destroy', auth, authAdmin, (req, res) => {
-	try {
-		const {public_id} = req.body
-		if(!public_id) res.status(400).json({msg: 'No image selected'})
+    try {
+        const { public_id } = req.body
+        if (!public_id) res.status(400).json({ msg: 'No image selected' })
 
-		cloudinary.destroy(public_id, async(err, result) => {
-			if(err) throw err
+        cloudinary.destroy(public_id, async (err, result) => {
+            if (err) throw err
 
-			console.log(result)
+            console.log(result)
 
-			res.json({mgs: 'Deleted Image'})
-		})
-	} catch (error) {
-		return res.status(500).json({msg: error.message})
-	}
+            res.json({ mgs: 'Deleted Image' })
+        })
+    } catch (error) {
+        return res.status(500).json({ msg: error.message })
+    }
 })
 
 const removeTemp = (path) => {
-	fs.unlink(path, err => {
-		if(err) throw err
-	})
+    fs.unlink(path, err => {
+        if (err) throw err
+    })
 }
 
 export default router

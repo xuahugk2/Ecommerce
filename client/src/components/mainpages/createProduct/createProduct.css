@@ -47,7 +47,7 @@
     background: white;
 }
 
-#file_img img{
+#file_img img {
     width: 100%;
     height: 100%;
     display: block;
@@ -79,7 +79,8 @@
     margin: 10px 0;
 }
 
-.create-product form input, textarea {
+.create-product form input,
+textarea {
     width: 100%;
     min-height: 40px;
     padding: 0 5px;

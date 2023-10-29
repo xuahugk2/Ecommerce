@@ -1,25 +1,25 @@
 import mongoose from "mongoose";
 
 const userModel = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
         required: true,
         trim: true
     },
-    email:{
+    email: {
         type: String,
         required: true,
         unique: true
     },
-    password:{
+    password: {
         type: String,
         required: true
     },
-    role:{
+    role: {
         type: Number,
         default: 0
     },
-    cart:{
+    cart: {
         type: Array,
         default: []
     },

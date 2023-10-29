@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function ProductAPI() {
@@ -9,19 +9,19 @@ export default function ProductAPI() {
     const [category, setCategory] = useState('')
 
     const [sort, setSort] = useState('')
-    
+
     const [search, setSearch] = useState('')
 
     const [page, setPage] = useState(1)
 
     const [result, setResult] = useState(0)
-    
+
     useEffect(() => {
-		const getProducts = async () => {
-			const res = await axios.get(`/api/products?limit=${page * 6}&${category}&${sort}&title[regex]=${search}`)
-			setProducts(res.data.products)
+        const getProducts = async () => {
+            const res = await axios.get(`/api/products?limit=${page * 6}&${category}&${sort}&title[regex]=${search}`)
+            setProducts(res.data.products)
             setResult(res.data.result)
-		}
+        }
 
         getProducts()
     }, [callback, category, page, search, sort])

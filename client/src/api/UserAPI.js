@@ -1,73 +1,73 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function UserAPI(token) {
-	const [isLogged, setIsLogged] = useState(false)
+    const [isLogged, setIsLogged] = useState(false)
 
-	const [isAdmin, setIsAdmin] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
 
-	const [cart, setCart] = useState([])
+    const [cart, setCart] = useState([])
 
-	const [history, setHistory] = useState([])
+    const [history, setHistory] = useState([])
 
-	const [contacts, setContacts] = useState([])
+    const [contacts, setContacts] = useState([])
 
-	useEffect(() => {
-		if(token) {
-			const getUser = async () => {
-				try {
-					const res = await axios.get('user/infor', {
-						headers: {Authorization: token}
-					})
+    useEffect(() => {
+        if (token) {
+            const getUser = async () => {
+                try {
+                    const res = await axios.get('user/infor', {
+                        headers: { Authorization: token }
+                    })
 
-					setIsLogged(true)
-					res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
+                    setIsLogged(true)
+                    res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
 
-					setCart(res.data.cart)
-				} catch (error) {
-					alert(error.response.data.msg)
-				}
-			}
+                    setCart(res.data.cart)
+                } catch (error) {
+                    alert(error.response.data.msg)
+                }
+            }
 
-			const getContact = async () => {
-				if(isAdmin) {
-					const res = await axios.get('/user/contacts', {
-						headers: {Authorization: token}
-					})
-					setContacts(res.data)
-				}
-			}
+            const getContact = async () => {
+                if (isAdmin) {
+                    const res = await axios.get('/user/contacts', {
+                        headers: { Authorization: token }
+                    })
+                    setContacts(res.data)
+                }
+            }
 
-			getUser()
+            getUser()
 
-			getContact()
-		}
-	}, [token, isAdmin])
+            getContact()
+        }
+    }, [token, isAdmin])
 
-	const addCart = async (product) => {
-		if(!isLogged) return alert("Please login to continue buying.")
+    const addCart = async (product) => {
+        if (!isLogged) return alert("Please login to continue buying.")
 
-		const check = cart.every(item => {
-			return item._id !== product._id
-		})
+        const check = cart.every(item => {
+            return item._id !== product._id
+        })
 
-		if(check) {
-			setCart([...cart, {...product, quantity: 1}])
+        if (check) {
+            setCart([...cart, { ...product, quantity: 1 }])
 
-			await axios.patch('/user/addcart', {cart: [...cart, {...product, quantity: 1}]}, {
-				headers: {Authorization: token}
-			})
-		}else{
-			alert("This product has been added to cart.")
-		}
-	}
+            await axios.patch('/user/addcart', { cart: [...cart, { ...product, quantity: 1 }] }, {
+                headers: { Authorization: token }
+            })
+        } else {
+            alert("This product has been added to cart.")
+        }
+    }
 
-	return {
-		isLogged: [isLogged, setIsLogged],
-		isAdmin: [isAdmin, setIsAdmin],
-		cart: [cart, setCart],
-		addCart: addCart,
-		history: [history, setHistory],
-		contacts: [contacts, setContacts]
-	}
+    return {
+        isLogged: [isLogged, setIsLogged],
+        isAdmin: [isAdmin, setIsAdmin],
+        cart: [cart, setCart],
+        addCart: addCart,
+        history: [history, setHistory],
+        contacts: [contacts, setContacts]
+    }
 }

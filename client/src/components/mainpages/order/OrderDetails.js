@@ -1,73 +1,73 @@
-import React, {useState, useEffect, useContext} from 'react'
-import {useParams} from 'react-router-dom'
-import {GlobalSate} from '../../../GlobalSate'
- 
+import React, { useState, useEffect, useContext } from 'react'
+import { useParams } from 'react-router-dom'
+import { GlobalSate } from '../../../GlobalSate'
+
 export default function OrderDetails() {
-	const state = useContext(GlobalSate)
+    const state = useContext(GlobalSate)
 
-	const [history] = state.userAPI.history
+    const [history] = state.userAPI.history
 
-	const [orderDetails, setOrderDetails] = useState([])
+    const [orderDetails, setOrderDetails] = useState([])
 
-	const params = useParams()
+    const params = useParams()
 
-	useEffect(() => {
-		if(params.id) {
-			history.forEach(item => {
-				if(item._id === params.id) setOrderDetails(item)
-			})
-		}
-	}, [params.id, history])
+    useEffect(() => {
+        if (params.id) {
+            history.forEach(item => {
+                if (item._id === params.id) setOrderDetails(item)
+            })
+        }
+    }, [params.id, history])
 
-	if(orderDetails.length === 0) return null
+    if (orderDetails.length === 0) return null
 
-	document.title = 'Order Detail'
+    document.title = 'Order Detail'
 
-	return (
-		<div className='history-page'>
-			<h2>Customer Information</h2>
-			<table> 
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Address</th>
-						<th>Postal Code</th>
-						<th>Country Code</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>{orderDetails.address.recipient_name}</td>
-						<td>{orderDetails.address.line1 + ' - ' + orderDetails.address.city}</td>
-						<td>{orderDetails.address.postal_code}</td>
-						<td>{orderDetails.address.country_code}</td>
-					</tr>
-				</tbody>
-			</table>
+    return (
+        <div className='history-page'>
+            <h2>Customer Information</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Postal Code</th>
+                        <th>Country Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{orderDetails.address.recipient_name}</td>
+                        <td>{orderDetails.address.line1 + ' - ' + orderDetails.address.city}</td>
+                        <td>{orderDetails.address.postal_code}</td>
+                        <td>{orderDetails.address.country_code}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-			<h2>Order Detail</h2>
-			<table style={{margin: "30px 0px"}}> 
-				<thead>
-					<tr>
-						<th></th>
-						<th>Product</th>
-						<th>Quantity</th>
-						<th>Price</th>
-					</tr>
-				</thead>
-				<tbody>
-					{
-						orderDetails.cart.map(item => (
-							<tr key={item._id}>
-								<td><img src={item.images.url} alt="" width='70'/></td>
-								<td>{item.title}</td>
-								<td>{item.quantity}</td>
-								<td>$ {item.price * item.quantity}</td>
-							</tr>
-						))
-					}					
-				</tbody>
-			</table>
-		</div>
-	)
+            <h2>Order Detail</h2>
+            <table style={{ margin: "30px 0px" }}>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        orderDetails.cart.map(item => (
+                            <tr key={item._id}>
+                                <td><img src={item.images.url} alt="" width='70' /></td>
+                                <td>{item.title}</td>
+                                <td>{item.quantity}</td>
+                                <td>$ {item.price * item.quantity}</td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </div>
+    )
 }

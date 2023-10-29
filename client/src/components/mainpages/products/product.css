@@ -8,9 +8,10 @@
 
 /*---------- Product Item ----------*/
 @import url('../utils/productItem/productItem.css');
+
 .delete-all {
     text-align: right;
-    margin: 20px;    
+    margin: 20px;
 }
 
 .delete-all input {
@@ -45,7 +46,8 @@
     margin: 15px 0;
 }
 
-.filter_menu select, input {
+.filter_menu select,
+input {
     border: 1px solid #ccc;
     outline: none;
     height: 40px;

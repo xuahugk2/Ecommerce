@@ -1,23 +1,23 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function CategoriesAPI() {
-	const [categories, setCategories] = useState([])
+    const [categories, setCategories] = useState([])
 
-	const [callback, setCallback] = useState(false)
+    const [callback, setCallback] = useState(false)
 
-	useEffect(() => {
-		const getCategories = async () => {
-			const res = await axios.get('/api/category')
+    useEffect(() => {
+        const getCategories = async () => {
+            const res = await axios.get('/api/category')
 
-			setCategories(res.data);
-		}
+            setCategories(res.data);
+        }
 
-		getCategories()
-	}, [callback])
+        getCategories()
+    }, [callback])
 
-	return {
-		categories: [categories, setCategories],
-		callback: [callback, setCallback]
-	}
+    return {
+        categories: [categories, setCategories],
+        callback: [callback, setCallback]
+    }
 }

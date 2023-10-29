@@ -1,6 +1,6 @@
 import dotenv from "dotenv"
 dotenv.config()
-import express  from "express"
+import express from "express"
 import mongoose from "mongoose"
 import cors from "cors"
 import fileUpload from "express-fileupload"
@@ -32,14 +32,21 @@ import paymentRouter from './routes/paymentRouter.js'
 app.use('/api', paymentRouter)
 
 //Connect to MongoDB by mongoose
-const URI = process.env.MONGO_URI
-await mongoose.connect(URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+const MONGO_URI = process.env.MONGO_URI
+mongoose.connect(MONGO_URI);
+mongoose.connection.once('connected', () => {
+    console.log('Database Connected');
+});
+mongoose.connection.on('error', (error) => {
+    console.log(error);
+    logEvents(
+        `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
+        'mongoErrLog.log',
+    );
+});
 
 
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
