@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useMemo } from 'react'
 import { GlobalSate } from '../../../GlobalSate'
 import axios from 'axios'
 import PaypalButton from './PaypalButton'
@@ -15,6 +15,14 @@ export default function Cart() {
     const [token] = state.token
 
     const [total, setTotal] = useState(0)
+
+    const salesTax = useMemo(() => {
+        return total * 0.1
+    }, [total])
+
+    const price = useMemo(() => {
+        return total + salesTax
+    }, [total, salesTax])
 
     const [loading, setLoading] = useState(false)
 
@@ -186,11 +194,11 @@ export default function Cart() {
                         </div>
                         <div className="flex justify-between px-4">
                             <span className="font-bold">Sales Tax</span>
-                            <span className="font-bold">$0.00</span>
+                            <span className="font-bold">{`$${salesTax}`}</span>
                         </div>
                         <div className="flex items-center justify-between px-4 py-2 mt-3 border-t-2">
                             <span className="text-xl font-bold">Total</span>
-                            <span className="text-2xl font-bold">{`$${total}`}</span>
+                            <span className="text-2xl font-bold">{`$${price}`}</span>
                         </div>
                     </div>
                 </div>
