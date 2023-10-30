@@ -18,7 +18,7 @@ const paymentController = {
 
             if (!user) return res.status(400).json({ msg: 'User does not exist.' })
 
-            const { cart, paymentID, address } = req.body
+            const { cart, paymentID } = req.body
             const { _id, name, email } = user
 
             const newPayment = new paymentModel({
@@ -26,7 +26,6 @@ const paymentController = {
                 name,
                 email,
                 paymentID,
-                address,
                 cart
             })
 

@@ -1,50 +1,25 @@
-import React from 'react';
-// import PaypalExpressBtn from 'react-paypal-express-checkout';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
-export default class PaypalButton extends React.Component {
-    render() {
-        const onSuccess = (payment) => {
-            console.log("The payment was succeeded!", payment);
-            this.props.tranSuccess(payment)
-        }
+export default function PaypalButton(props) {
 
-        const onCancel = (data) => {
-            console.log('The payment was cancelled!', data);
-        }
+    const { total, tranSuccess } = props;
 
-        const onError = (err) => {
-            console.log("Error!", err);
-        }
+    // const createOrder = (data, actions) => {
+    //     return actions.order.create({
+    //         purchase_units: {
+    //             amount: {
+    //                 value: total
+    //             }
+    //         }
+    //     })
+    // }
 
-        let env = 'sandbox';
-        let currency = 'USD';
-        let total = this.props.total;
-
-        const client = {
-            sandbox: 'ASFrfWIQ4oULnykpDo0BF18GCCu3QXfUnm1w-ll2mNJ4RovO3K2Z2VFUXVZqhWJZ22feToBQUWmr1jal',
-            production: 'YOUR-PRODUCTION-APP-ID',
-        }
-
-        let style = {
-            size: 'small',
-            color: 'blue',
-            shape: 'rect',
-            label: 'checkout',
-            tagline: false
-        }
-
-        return (
-            // <PaypalExpressBtn
-            //     env={env}
-            //     client={client}
-            //     currency={currency}
-            //     total={total}
-            //     onError={onError}
-            //     onSuccess={onSuccess}
-            //     onCancel={onCancel}
-            //     style={style}
-            // />
-            <button>Paypal</button>
-        );
-    }
+    return (
+        <PayPalScriptProvider options={{ clientId: "ASFrfWIQ4oULnykpDo0BF18GCCu3QXfUnm1w-ll2mNJ4RovO3K2Z2VFUXVZqhWJZ22feToBQUWmr1jal" }}>
+            <PayPalButtons
+                onApprove={tranSuccess}
+            // createOrder={createOrder}
+            />
+        </PayPalScriptProvider>
+    );
 }

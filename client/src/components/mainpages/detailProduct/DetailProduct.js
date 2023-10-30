@@ -50,6 +50,7 @@ export default function DetailProduct() {
                     <span>{`Price: $${detail.price}`}</span>
                     <p>{detail.description}</p>
                     <p>Sold: {detail.sold}</p>
+                    <p>Quantity: {detail.quantity}</p>
                     <Link to='/cart' className='cart'
                         onClick={() => addCart(detail)}>
                         Buy Now

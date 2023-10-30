@@ -143,7 +143,7 @@ export default function CreateProduct() {
                 }
 
                 setCallback(!callback)
-                history.push('/')
+                history('/')
             } else {
                 alert("You're not an admin.")
             }

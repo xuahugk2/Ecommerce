@@ -30,6 +30,7 @@ export default function Login() {
             window.location.href = "/"
         } catch (error) {
             if (error) alert(error.response.data.msg)
+            window.location.reload()
         }
     }
 

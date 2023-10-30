@@ -25,26 +25,6 @@ export default function OrderDetails() {
 
     return (
         <div className='history-page'>
-            <h2>Customer Information</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Postal Code</th>
-                        <th>Country Code</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{orderDetails.address.recipient_name}</td>
-                        <td>{orderDetails.address.line1 + ' - ' + orderDetails.address.city}</td>
-                        <td>{orderDetails.address.postal_code}</td>
-                        <td>{orderDetails.address.country_code}</td>
-                    </tr>
-                </tbody>
-            </table>
-
             <h2>Order Detail</h2>
             <table style={{ margin: "30px 0px" }}>
                 <thead>
